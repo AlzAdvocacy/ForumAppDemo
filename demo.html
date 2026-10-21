@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Demo scenarios for the Alz Advocacy Forum prototype</title>
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<style>
+@font-face{font-family:'Archivo';font-weight:500;font-display:swap;src:url(fonts/archivo-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Archivo';font-weight:700;font-display:swap;src:url(fonts/archivo-latin-700-normal.woff2) format('woff2')}
+@font-face{font-family:'Archivo';font-weight:900;font-display:swap;src:url(fonts/archivo-latin-900-normal.woff2) format('woff2')}
+:root{--purple:#5A1C7A;--purple-deep:#4A0D66;--purple-soft:#EFE7F6;--gold:#FFA400;--ink:#1E1626;--ink-2:#5C5368;--ink-3:#7F7689;--line:#E8E2EF;--canvas:#F4F1F8;--paper:#FFFFFF;
+  --shadow:0 1px 2px rgba(42,20,64,.06),0 10px 30px rgba(42,20,64,.08)}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Archivo',-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--canvas);line-height:1.45;-webkit-text-size-adjust:100%;font-weight:500}
+header{background:var(--paper);border-bottom:1px solid var(--line);padding:calc(env(safe-area-inset-top,0px) + 12px) 24px 12px}
+.wrap{max-width:1120px;margin:0 auto}
+header .wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+header img{height:40px;width:auto;display:block}
+header .t{font-weight:700;font-size:1.15rem;letter-spacing:-.01em;line-height:1.1}
+header .s{color:var(--purple);font-weight:700;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
+header nav{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+header nav a{color:var(--purple-deep);font-weight:700;text-decoration:none;background:var(--purple-soft);border-radius:99px;padding:8px 14px;min-height:40px;display:inline-flex;align-items:center}
+main{padding:28px 24px 56px}
+h1{font-weight:700;font-size:clamp(1.8rem,4vw,2.5rem);letter-spacing:-.025em;line-height:1.05;margin:0 0 10px;max-width:24ch;text-wrap:balance}
+.lede{color:var(--ink-2);max-width:62ch;margin:0 0 10px;font-size:1.05rem}
+.note{font-size:.95rem;color:var(--ink-2);max-width:72ch;margin:0 0 26px}
+h2{font-weight:700;font-size:1.3rem;letter-spacing:-.015em;margin:34px 0 4px}
+.daysub{color:var(--ink-2);margin:0 0 14px;max-width:70ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.card{background:var(--paper);border-radius:22px;box-shadow:var(--shadow);padding:18px;display:grid;grid-template-columns:1fr 124px;gap:4px 16px;align-items:start}
+.card.staff{box-shadow:var(--shadow),inset 0 0 0 2px var(--purple-deep)}
+.card h3{margin:0;font-weight:700;font-size:1.2rem;letter-spacing:-.01em;line-height:1.15}
+.who{color:var(--ink-2);font-size:.92rem;margin:2px 0 10px}
+.shows{font-size:.95rem;margin:0;grid-column:1}
+.qr{grid-column:2;grid-row:1 / span 3;width:124px;height:124px;border-radius:12px;overflow:hidden;background:#fff}
+.qr svg{width:100%;height:100%;display:block}
+.chips{grid-column:1 / -1;display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.chip{display:inline-block;background:var(--purple-soft);color:var(--purple-deep);font-weight:700;letter-spacing:.06em;border-radius:99px;padding:3px 10px;font-size:.78rem}
+.chip.time{background:#FFF1C9;color:#6B4E00;letter-spacing:0}
+.acts{grid-column:1 / -1;display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;background:var(--purple-soft);color:var(--purple-deep);border-radius:12px;padding:9px 14px;min-height:42px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.btn.primary{background:var(--purple-deep);color:#fff}
+.url{grid-column:1 / -1;font-size:.76rem;color:var(--ink-3);word-break:break-all;margin-top:8px}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;border-top:1px solid var(--line);padding-top:26px;margin-top:40px}
+.how h2{font-size:1.1rem;margin:0 0 10px}
+.how ol,.how ul{margin:0;padding-left:20px}
+.how li{margin:0 0 8px;max-width:60ch}
+.tip{background:var(--purple-soft);color:var(--purple-deep);padding:12px 16px;border-radius:16px;margin-top:26px;max-width:80ch;font-size:.95rem}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+@media print{header{print-color-adjust:exact;-webkit-print-color-adjust:exact}.acts,.how,.tip,header nav{display:none}.card{break-inside:avoid;box-shadow:none;border:1px solid var(--line)}.grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <img src="img/aim-logo-purple.png" alt="AIM, Alzheimer's Impact Movement, Alzheimer's Association">
+  <div><div class="t">Demo scenarios</div><div class="s">Advocacy Forum app prototype</div></div>
+  <nav><a href="./">Open the app</a><a href="links.html">Persona links</a></nav>
+</div></header>
+<main><div class="wrap">
+  <h1>Pick a person and a moment in the week</h1>
+  <p class="lede">Each link opens the app as one fictional attendee with the demo clock set to a particular day and time, so you can show what the app looks like before Hill Day, during it, and on the way home. Point a phone camera at the code, or copy the link into a text message.</p>
+  <p class="note">The clock is simulated: Hill Day is always "today", Day 1 is yesterday and Day 3 is tomorrow. Opening a link resets the clock on that phone. Tap the AIM logo three times inside the app to change it again. Every name, meeting and schedule is fictional.</p>
+
+  <div id="days"></div>
+
+  <section class="how">
+    <div>
+      <h2>Set up a demo phone</h2>
+      <ol>
+        <li><b>iPhone:</b> open a link in Safari, tap Share, then Add to Home Screen, then Add. Open the app from the Home Screen.</li>
+        <li><b>Android:</b> open the link in Chrome and tap Install when it appears, or use the menu and choose Add to Home screen.</li>
+        <li>Open the app once while you have a signal. After that it opens without one.</li>
+      </ol>
+    </div>
+    <div>
+      <h2>Run the demo</h2>
+      <ul>
+        <li><b>Demo controls:</b> tap the AIM logo at the top of the app three times. Tap Done to hide them.</li>
+        <li><b>Change the moment:</b> the clock picker in the controls has the same presets as this page, plus "Hill Day at the real time".</li>
+        <li><b>Schedule change in 10 seconds</b> gives you time to set the phone down. The banner appears, the phone buzzes on Android, and the change shows on Home and Meetings.</li>
+        <li><b>Airplane mode</b> keeps the whole schedule on screen and shows the offline banner.</li>
+        <li><b>Reset demo data</b> in the controls puts everything back to the start.</li>
+      </ul>
+    </div>
+  </section>
+  <p class="tip">This page and the app are public at this address. Use only fictional data here. Real advocate names, phone numbers or schedules should never go in this repository.</p>
+</div></main>
+<script src="vendor/qrcode.js"></script>
+<script>
+/* Clock presets match CONFIG.clockPresets in index.html, by index:
+   0 Day 1, 3:40 PM   1 Day 1, 7:15 PM   2 Hill Day, 7:45 AM   3 Hill Day, 8:05 AM
+   4 Hill Day, 11:20 AM   5 Hill Day, real time   6 Day 3, 8:30 AM */
+const DAYS = [
+  { title: 'Day 1. Arrival day, not a Hill day', sub: 'Registration, the expo, the Welcome Program and Hill Meeting Prep with your state. Home shows the next agenda item instead of meetings, and the Agenda tab opens on Day 1.', items: [
+    { q: 'c=K7Q4M2&clock=0', code: 'K7Q4M2', time: 'Day 1, 3:40 PM', name: 'Denise Carver', who: 'Ohio. Ambassador.', shows: 'The afternoon before Hill Day. Welcome Program is up next with a countdown, then Hill Meeting Prep with the Ohio delegation at 5:30.' },
+    { q: 'c=T5M9K2&clock=1', code: 'T5M9K2', time: 'Day 1, 7:15 PM', name: 'Gwen Adebayo', who: 'Ohio. First-time advocate.', shows: 'The evening before. A first-timer with phone alerts off, so updates reach her by text only. Good for showing the alerts opt-in flow.' },
+    { q: 'c=Z2W7L4&clock=0', code: 'Z2W7L4', time: 'Day 1, 3:40 PM', name: 'Harold Pike', who: 'Georgia. First-time advocate.', shows: 'What someone sees before staff have assigned any meetings. Nothing is wrong on his end, and the app says so.' }
+  ] },
+  { title: 'Day 2. Hill Day', sub: 'Buses, meetings, check-ins, schedule changes, the map and the reports. The busiest day for the app and the one most demos start with.', items: [
+    { q: 'c=K7Q4M2&clock=3', code: 'K7Q4M2', time: 'Hill Day, 8:05 AM', name: 'Denise Carver', who: 'Ohio. Ambassador.', shows: 'The everyday view. First meeting in under an hour. She leads one meeting group and sits on another, so you see both sides.' },
+    { q: 'c=P4L7Q8&clock=2', code: 'P4L7Q8', time: 'Hill Day, 7:45 AM', name: 'Theo Brandt', who: 'Colorado. Ambassador.', shows: 'Changes rolling in. One meeting already moved and one is still tentative, with the alert waiting on Home.' },
+    { q: 'c=S9E3T6&clock=4', code: 'S9E3T6', time: 'Hill Day, 11:20 AM', name: 'Dolores Abara', who: 'Texas. Ambassador.', shows: 'Mid-day at scale. Texas brings 60 advocates, split into small groups, and she leads one of them.' },
+    { q: 'c=K7Q4M2&clock=5', code: 'K7Q4M2', time: 'Hill Day, real time', name: 'Denise Carver', who: 'Ohio. Ambassador.', shows: 'Hill Day matched to the phone\'s own clock. Use this when you want the countdowns to feel live during a presentation.' }
+  ] },
+  { title: 'Day 3. Going home', sub: 'Breakfast, the closing general sessions and lunch to go. Shows the wrap up state and the actions that continue after the Forum.', items: [
+    { q: 'c=K7Q4M2&clock=6', code: 'K7Q4M2', time: 'Day 3, 8:30 AM', name: 'Denise Carver', who: 'Ohio. Ambassador.', shows: 'The last morning. General sessions up next, yesterday\'s meetings behind her, and the Act tab pointing at thank-you notes and follow-ups.' },
+    { q: 'c=P4L7Q8&clock=6', code: 'P4L7Q8', time: 'Day 3, 8:30 AM', name: 'Theo Brandt', who: 'Colorado. Ambassador.', shows: 'Same morning for a second person, to show that the day after is calm for everyone whatever happened on the Hill.' }
+  ] },
+  { title: 'Staff view', sub: 'Home Office and field staff. Best on a laptop or tablet.', items: [
+    { q: 'view=staff&clock=3', code: 'Staff', time: 'Hill Day, 8:05 AM', name: 'Staff control room', who: 'Edit a meeting, send the change, watch the situation board.', shows: 'Open this on a laptop next to an attendee phone. Edit one of Denise\'s meetings here and the phone shows the change.', staff: true }
+  ] }
+];
+const base = new URL('./', location.href);
+const el = document.getElementById('days');
+el.innerHTML = DAYS.map(d => `<h2>${d.title}</h2><p class="daysub">${d.sub}</p><div class="grid">${d.items.map(p => {
+  const url = new URL('?' + p.q, base).href;
+  let svg = '';
+  try { const qr = qrcode(0, 'M'); qr.addData(url); qr.make(); svg = qr.createSvgTag({ cellSize: 4, margin: 2, scalable: true, alt: 'QR code for ' + p.name + ', ' + p.time }); } catch (e) { svg = ''; }
+  return `<article class="card ${p.staff ? 'staff' : ''}">
+    <div><h3>${p.name}</h3><div class="who">${p.who}</div></div>
+    <div class="qr">${svg}</div>
+    <p class="shows">${p.shows}</p>
+    <div class="chips"><span class="chip">${p.code}</span><span class="chip time">${p.time}</span></div>
+    <div class="acts"><a class="btn primary" href="${url}">Open</a><button class="btn" data-copy="${url}">Copy link</button></div>
+    <div class="url">${url}</div>
+  </article>`; }).join('')}</div>`).join('');
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-copy]'); if (!b) return;
+  const done = () => { b.textContent = 'Copied'; setTimeout(() => { b.textContent = 'Copy link'; }, 1600); };
+  if (navigator.clipboard) navigator.clipboard.writeText(b.dataset.copy).then(done).catch(() => prompt('Copy this link', b.dataset.copy));
+  else prompt('Copy this link', b.dataset.copy);
+});
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname))) navigator.serviceWorker.register('sw.js').catch(() => { });
+</script>
+</body>
+</html>

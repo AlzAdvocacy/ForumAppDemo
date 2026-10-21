@@ -3255,6 +3255,14 @@ function attendeeShell() {
     <nav class="tabs six five" aria-label="Main">${tab('home', 'Home')}${tab('agenda', 'Agenda')}${tab('meetings', 'Meetings')}${tab('act', 'Act')}${tab('team', 'Team')}</nav>`;
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && state.hubOpen) { state.hubOpen = false; render(); } });
+/* Link parameter: ?clock=N opens the app at a demo clock preset (the numbers match CONFIG.clockPresets).
+   demo.html builds its links with it so a QR code can open the app on a non Hill day. */
+(function () {
+  const p = new URLSearchParams(location.search).get('clock'); if (p === null) return;
+  const i = Number(p); if (!CONFIG.clockPresets[i]) return;
+  state.clockPreset = i; state.clockBase = Date.now();
+  if (state.view === 'attendee' && state.attendeeId) { state.screen = 'home'; state.arg = null; state.hubOpen = false; }
+})();
 render();
 
 </script>

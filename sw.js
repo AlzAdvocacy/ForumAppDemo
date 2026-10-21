@@ -1,8 +1,8 @@
 /* Offline support. Change VERSION whenever you upload new files so every
    phone refreshes its saved copy on the next launch. */
-const VERSION = 'forum-demo-1';
+const VERSION = 'forum-demo-2';
 const CORE = [
-  './', './index.html', './links.html', './app-config.js', './manifest.webmanifest', './vendor/qrcode.js',
+  './', './index.html', './links.html', './demo.html', './app-config.js', './manifest.webmanifest', './vendor/qrcode.js',
   './img/aim-logo-white.png', './img/aim-logo-purple.png',
   './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-512.png', './icons/apple-touch-icon.png', './icons/favicon-32.png',
   './fonts/archivo-latin-500-normal.woff2', './fonts/archivo-latin-700-normal.woff2', './fonts/archivo-latin-900-normal.woff2'
@@ -26,7 +26,9 @@ self.addEventListener('fetch', e => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
-  const key = req.mode === 'navigate' ? (url.pathname.endsWith('links.html') ? './links.html' : './index.html') : req;
+  // Each page is cached under its own name; anything else that navigates (the app's start URL, a persona link) is the app itself.
+  const page = url.pathname.split('/').pop();
+  const key = req.mode === 'navigate' ? (page && page.endsWith('.html') ? './' + page : './index.html') : req;
   const fresh = fetch(req).then(res => {
     if (res && res.ok) { const copy = res.clone(); caches.open(VERSION).then(c => c.put(key, copy)); }
     return res;

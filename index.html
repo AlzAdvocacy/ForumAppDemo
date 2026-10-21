@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Alz Advocacy Forum</title>
 <meta name="description" content="Prototype of the Advocacy Forum attendee app. All names, meetings and schedules are fictional.">
-<meta name="theme-color" content="#4A0D66">
+<meta name="theme-color" content="#FFFFFF">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -486,202 +486,22 @@ body.fs.fs-open .fs-handle{display:none}
 .phone[data-contrast="high"] .proto-strip{background:#000;color:#fff}
 .push:not(.show){visibility:hidden}
 
-/* ---------- Direction B: Bold Campaign ---------- */
-:root{
-  --font:'Archivo','Houschka Alt Pro',Helvetica,Arial,sans-serif;
-  --purple:#4A0D66; --purple-deep:#37094C; --purple-soft:#EEE3F3; --purple-tint:#F6F0F9;
-  --ink:#1A1A1A; --ink-2:#58595B; --ink-3:#6E6F72; --line:#E6E7E8; --line-strong:#1A1A1A;
-  --paper:#FFFFFF; --canvas:#FFFFFF;
-  --ok:#1F5A53; --ok-soft:#CDE6E3; --warn:#7A4B00; --warn-soft:#FFE2B0; --moved:#4A0D66; --moved-soft:#EEE3F3; --bad:#A3291D; --bad-soft:#F8E1DE;
-  --teal:#359A8E; --gold:#FFA400; --focus:#FFA400; --radius:6px;
-  --page-bg:#E9E4EE; --demo-bg:#1C2431;
-}
-body{font-family:var(--font)}
-.phone{background:#fff}
-.screen h1{font-weight:900;text-transform:uppercase;letter-spacing:-.02em;font-size:1.75em;line-height:.98}
-.screen h2{font-weight:900;text-transform:uppercase;letter-spacing:.02em;font-size:.95em}
-.lede{font-weight:500}
-.tiny,.muted,.small{font-weight:500}
-
-/* header and chrome */
-.app-head,.staff-head.app-head{background:var(--purple);padding:16px 18px 18px}
-.app-head::before,.app-head::after{display:none}
-.app-head .wordmark{font-size:.72em;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#fff}
-.app-head .sub{font-size:.78em;color:#D2C3D9;font-weight:500}
-.bell{border-radius:8px;border:2px solid rgba(255,255,255,.55);background:transparent}
-.bell .badge{background:var(--gold);color:var(--purple)}
-.avatar{border-radius:8px}
-.head-r .avatar{background:var(--gold)!important;color:var(--purple);border:0}
-.proto-strip{background:#1A1A1A;color:#fff;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.62em}
-.offline-banner{background:var(--gold);color:var(--purple);font-weight:700}
-.offline-banner .dot{background:var(--purple)}
-
-/* buttons */
-.btn{border-radius:6px;border:2px solid #1A1A1A;font-weight:900;text-transform:uppercase;letter-spacing:.03em;font-size:.92em;background:#fff;color:#1A1A1A}
-.btn:hover{background:var(--purple-tint)}
-.btn-primary{background:var(--teal);border-color:var(--teal);color:#fff;font-size:1em;box-shadow:none}
-.btn-primary:hover{background:#256D65;border-color:#256D65}
-.btn-ghost{border-color:transparent;color:var(--purple);text-transform:none;letter-spacing:0;font-weight:700}
-.btn-light{background:var(--purple);border-color:var(--purple);color:#fff}
-.btn-light:hover{background:var(--purple-deep)}
-.btn-sm{font-size:.8em;border-radius:5px}
-.back{text-transform:uppercase;font-weight:900;font-size:.85em;letter-spacing:.04em}
-.link{font-weight:900;text-transform:uppercase;font-size:.85em;letter-spacing:.03em;text-decoration:none;border-bottom:2px solid currentColor;padding-bottom:0}
-.input,select.input,textarea.input{border:2px solid #1A1A1A;border-radius:6px}
-.radios label{border:2px solid #1A1A1A;border-radius:6px;font-weight:700}
-.radios label:has(input:checked){background:var(--gold);border-color:var(--gold);color:var(--purple)}
-.chips button{border:2px solid #1A1A1A;border-radius:6px;font-weight:900;text-transform:uppercase;font-size:.78em;letter-spacing:.04em}
-.chips button.on{background:var(--purple);border-color:var(--purple);box-shadow:none}
-.chips.sub button{font-weight:700;text-transform:none;font-size:.85em;letter-spacing:0}
-.chips.sub button.on{background:var(--purple-soft);color:var(--purple);border-color:var(--purple)}
-.switch input:checked{background:var(--teal)}
-
-/* pills */
-.pill{border-radius:4px;text-transform:uppercase;font-size:.7em;letter-spacing:.06em;font-weight:900;padding:4px 8px}
-.pill.confirmed{background:var(--ok-soft);color:var(--ok)}
-.pill.tentative{background:var(--warn-soft);color:var(--warn)}
-.pill.moved{background:var(--gold);color:var(--purple)}
-.pill.cancelled{background:#1A1A1A;color:#fff}
-.pill.lead{background:var(--gold);color:var(--purple)}
-.pill.off{background:#E6E7E8;color:#58595B}
-
-/* home */
-.hero,.hero.next{background:#fff;color:#1A1A1A;border:3px solid #1A1A1A;border-radius:6px;box-shadow:8px 8px 0 var(--purple);padding:16px 18px}
-.hero.next::after{display:none}
-.hero.next .when{color:var(--purple);font-weight:900;letter-spacing:.12em;text-transform:uppercase;font-size:.75em}
-.pulse{display:none}
-.daychip{background:var(--gold);color:var(--purple);border:0;border-radius:4px;font-weight:900;text-transform:uppercase;font-size:.72em;letter-spacing:.06em}
-.hero.next .big{font-size:1.75em;font-weight:900;letter-spacing:-.03em;line-height:1;text-transform:none;margin:8px 0 6px}
-.hero.next .sub2{color:#58595B;font-weight:500}
-.hero.next .count{display:inline-block;background:var(--gold);color:var(--purple);font-weight:900;text-transform:uppercase;font-size:.85em;letter-spacing:.06em;padding:4px 8px;border-radius:4px;margin-top:4px}
-.dayprog .bar{background:#E6E7E8;height:10px;border-radius:2px}
-.dayprog .bar span{background:var(--purple)}
-.dayprog .tiny{color:#58595B;font-weight:700}
-.changes{background:var(--warn-soft);border-left:6px solid var(--gold);border-radius:0 6px 6px 0}
-.changes.none{background:var(--ok-soft);border-left-color:var(--teal)}
-.changes h2{text-transform:none;letter-spacing:0;font-size:1em}
-.bus{border:2px solid #1A1A1A;border-left:8px solid var(--gold);border-radius:0 6px 6px 0}
-.actcard{border:3px solid #1A1A1A;border-radius:6px;box-shadow:6px 6px 0 var(--teal)}
-.quick .btn{text-transform:none;letter-spacing:0;font-size:1em;align-items:flex-start;text-align:left;border-width:2px}
-.quick .btn small{font-weight:500}
-.callout{background:var(--purple-soft);color:var(--purple);border-radius:6px;font-weight:500;border-left:6px solid var(--purple)}
-
-/* timelines, lists, cards */
-.tl{border-left:3px solid #1A1A1A}
-.tl li::before{border-color:#1A1A1A;background:#fff}
-.tl li.live::before{background:var(--gold);border-color:var(--gold)}
-.tl li.done::before{background:var(--teal);border-color:var(--teal)}
-.tl li button{border:2px solid #E6E7E8;border-radius:6px}
-.tl li.live button{border-color:var(--gold)}
-.tl .tl-t{font-weight:900;font-size:1em}
-.card,.contact,.announce,.report,.stat,.result,.preview,.notif .ico,.menu button,.resrow,.actrow,.detail-head,.hero{border-radius:6px}
-.card,.contact,.announce,.menu button,.resrow,.actrow,.report,.stat{border:2px solid #E6E7E8}
-.menu button{font-weight:900;text-transform:uppercase;font-size:.9em;letter-spacing:.02em}
-.menu button small{text-transform:none;letter-spacing:0;font-weight:500}
-.detail-head{border:3px solid #1A1A1A;box-shadow:8px 8px 0 var(--purple)}
-.detail-head .time{font-weight:900;letter-spacing:-.02em}
-.detail-head h1{font-size:1.5em}
-.kv dd{font-weight:700}
-.meeting{border:2px solid #E6E7E8;border-radius:6px}
-.meeting .strip{width:10px}
-.meeting.cancelled .strip{background:#1A1A1A}
-.meeting.moved .strip{background:var(--gold)}
-.meeting .bbadge{border-radius:6px;font-weight:900}
-.meeting .bbadge.house{background:#1A1A1A}
-.meeting .bbadge.senate{background:var(--purple)}
-.meeting .time{font-weight:900;font-size:1.15em;letter-spacing:-.02em}
-.warnrow{border:2px solid var(--gold);background:var(--warn-soft);border-radius:6px;color:#5A3200;font-weight:500}
-.rail .item.general{background:none;border-left:6px solid var(--purple);padding-left:10px;margin-left:-16px;border-radius:0}
-.rail .item .title::before{border-radius:2px}
-.rail .title{font-weight:900}
-.rail .t{font-weight:900}
-.rail .block{background:var(--gold);color:var(--purple);font-weight:900;text-transform:uppercase;font-size:.7em;letter-spacing:.06em;border-radius:3px}
-.star.on{color:var(--gold)}
-details.prep{border:2px solid #E6E7E8;border-radius:6px}
-details.prep summary{font-weight:900;text-transform:uppercase;font-size:.85em;letter-spacing:.03em}
-.ph{border:2px dashed #1A1A1A;border-radius:6px;background:#fff;font-style:normal;color:#58595B}
-.askrow{border:2px solid #1A1A1A;border-radius:6px}
-.askrow.on{border-color:var(--teal);background:var(--ok-soft)}
-.mode-head{background:var(--purple);border-radius:6px}
-.mode-title{font-weight:900;text-transform:uppercase;letter-spacing:-.02em}
-.steps span.on{background:var(--purple)}
-.steps span{border-radius:0;height:8px}
-.err{border-left:6px solid var(--gold);background:var(--warn-soft);color:#5A3200;border-radius:0 6px 6px 0}
-.empty{border:2px dashed #1A1A1A;border-radius:6px}
-
-/* act */
-.totals div{background:var(--purple);color:#fff;border-radius:6px}
-.totals b{color:#fff;font-weight:900}
-.totals span{color:#D2C3D9;text-transform:uppercase;font-size:.62em;letter-spacing:.08em;font-weight:700}
-.actrow .kind{border-radius:4px;background:var(--purple);color:#fff;text-transform:uppercase;letter-spacing:.06em;font-weight:900;font-size:.7em}
-.actrow.done .kind{background:var(--teal);color:#fff}
-.ring circle:nth-child(2){stroke:var(--teal)}
-
-/* team */
-.grp{display:flex;gap:12px;align-items:center;width:100%;background:#fff;border:2px solid #E6E7E8;border-radius:6px;padding:12px 14px;margin-bottom:8px;text-align:left;min-height:72px}
-.grp .grp-t{font-weight:900;font-size:.95em;min-width:62px;flex-shrink:0;letter-spacing:-.02em;white-space:nowrap}
+/* ---------- Structural rules shared by every theme ---------- */
+/* Rules that the app's render code depends on, written without any visual opinion. */
+.grp{display:flex;gap:12px;align-items:center;width:100%;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;margin-bottom:8px;text-align:left;min-height:72px}
+.grp .grp-t{font-weight:700;font-size:.95em;min-width:62px;flex-shrink:0;white-space:nowrap}
 .grp .grp-b{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .grp .avs{display:flex;flex-shrink:0}
-.grp .avs .avatar{margin-left:-8px;border:2px solid #fff}
+.grp .avs .avatar{margin-left:-8px;border:2px solid var(--paper)}
 .grp .avs .avatar:first-child{margin-left:0}
-.avatar.more{background:#1A1A1A;color:#fff}
-.member{border:2px solid #E6E7E8;border-radius:6px;font-weight:700}
-.member.lead{background:var(--gold);border-color:var(--gold);color:var(--purple)}
-.msg .bubble{border:2px solid #E6E7E8;border-radius:6px}
-.msg.mine .bubble{background:var(--purple);border-color:var(--purple)}
-.msg.staff .bubble{background:var(--gold);color:var(--purple);border-color:var(--gold);font-weight:500}
-.msg.staff .who{color:#7A4B00}
-.leg{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:2px solid #E6E7E8}
-.leg.tight{background:var(--warn-soft);margin:0 -8px;padding:12px 8px;border-radius:6px}
+.avatar.more{background:var(--ink);color:var(--paper)}
+.leg{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.leg.tight{background:var(--warn-soft);margin:0 -8px;padding:12px 8px;border-radius:var(--radius)}
 .leg .btn{flex-shrink:0}
-.mapwrap{border:3px solid #1A1A1A;border-radius:6px;box-shadow:8px 8px 0 var(--gold)}
-
-/* tabs */
-.tabs,.tabs.six{border-top:3px solid #1A1A1A}
-.tabs.six button{font-weight:900;text-transform:uppercase;letter-spacing:.04em;font-size:.62em;color:#58595B}
-.tabs.six button.on{color:var(--purple)}
-.tabs.six button .ico-svg{border-radius:6px}
-.tabs.six button.on .ico-svg{background:var(--gold);color:var(--purple)}
-.tabs .badge{border-radius:4px}
-
-/* staff */
-.stafftabs{border-bottom:3px solid #1A1A1A}
-.stafftabs button{font-weight:900;text-transform:uppercase;font-size:.78em;letter-spacing:.04em;border-radius:6px}
-.stafftabs button.on{background:var(--purple);color:#fff}
-.stafftabs .badge{border-radius:4px;background:var(--gold);color:var(--purple)}
-.trow{border:2px solid #E6E7E8;border-left-width:8px;border-radius:6px}
-.trow.moved{border-left-color:var(--gold)}.trow.cancelled{border-left-color:#1A1A1A}
-.trow .tt{font-weight:900}
-.filters select{border:2px solid #1A1A1A;border-radius:6px;font-weight:700}
-.sheet .panel{border-radius:6px 6px 0 0;border-top:3px solid #1A1A1A}
-.reach div{border:2px solid #E6E7E8;border-radius:6px}
-.reach b{font-weight:900}
-.boardrow{border:2px solid #E6E7E8;border-left-width:8px;border-radius:6px}
-.boardrow.late{border-left-color:var(--gold)}
-.bar{border-radius:2px;background:#E6E7E8}
-.bar span{background:var(--purple)}
-.stat .n{font-weight:900}
-.push{border-radius:14px}
-.push .app-ico{background:var(--purple);border-radius:8px}
-.toast{border-radius:6px;font-weight:700}
-.confetti{border-radius:0}
-
-/* entry */
-.entry .mark{font-size:.8em;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--purple)}
-.entry h1{font-size:2.2em}
-.code-input{border:3px solid #1A1A1A;font-weight:900}
-.phone[data-contrast="high"]{--purple:#2A0638;--teal:#1F5A53;--line:#1A1A1A}
-.phone[data-contrast="high"] .btn-primary{background:#1F5A53;border-color:#1F5A53}
-
-.head-r .avatar{color:var(--purple)!important}
-
-.app-head .logo{height:62px;width:auto;display:block;object-fit:contain}
+.app-head .logo{height:58px;width:auto;display:block;object-fit:contain}
 .app-head .sub{margin-top:5px}
-.head-l{display:flex;flex-direction:column;align-items:flex-start}
+.head-l{display:flex;flex-direction:column;align-items:flex-start;min-width:0}
 .entry .logo-big{width:230px;max-width:70%;height:auto;display:block;margin:4px 0 14px}
-.entry .mark{font-size:1.1em;letter-spacing:.12em}
-.app-head .sub{font-weight:900;text-transform:uppercase;letter-spacing:.12em;font-size:.68em;color:#FFA400}
-
 
 /* ---------- Part 5: installable app layer ---------- */
 @font-face{font-family:'Archivo';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/archivo-latin-500-normal.woff2) format('woff2')}
@@ -693,7 +513,7 @@ button,a,input,select{touch-action:manipulation}
 .screen{overscroll-behavior:contain}
 
 /* App mode: launched from the Home Screen, or opened on a phone */
-html.app{padding:0;height:100%;background:#4A0D66}
+html.app{padding:0;height:100%;background:#FFFFFF}
 html.app body{height:100%;min-height:0;overflow:hidden;overscroll-behavior:none;background:#FFFFFF}
 body.app .fs-handle{display:none!important}
 body.app .stage{padding:0;flex:1;min-height:0}
@@ -740,6 +560,203 @@ body.app.demo-open .demo-scrim{display:block;position:fixed;inset:0;z-index:299;
 .gpin.capitol{background:#FFA400;color:#4A0D66;border-color:#4A0D66}
 .gpin.hotel{background:#359A8E;color:#FFFFFF;border-color:#1F5A53}
 .mapnote{font-size:.88em;color:var(--ink-2);font-weight:500;margin:4px 0 8px}
+
+/* ---------- Theme: Daylight ---------- */
+/* Daylight: calm and airy. White chrome, brand purple as the single accent,
+   soft rounded cards on a faintly lavender canvas, iOS-style floating tab bar. */
+:root{
+  --font:'Archivo',-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --purple:#5A1C7A; --purple-deep:#4A0D66; --purple-soft:#EFE7F6; --purple-tint:#F7F3FB;
+  --ink:#1E1626; --ink-2:#5C5368; --ink-3:#7F7689; --line:#E8E2EF; --line-strong:#CFC6D9;
+  --paper:#FFFFFF; --canvas:#F4F1F8;
+  --ok:#1E7A4C; --ok-soft:#DDF3E6; --warn:#8A5300; --warn-soft:#FFF0CC;
+  --moved:#1D4F9E; --moved-soft:#E1EBFA; --bad:#B42318; --bad-soft:#FBE4E1;
+  --teal:#2C8C80; --gold:#FFA400; --focus:#1D4F9E; --radius:18px;
+  --page-bg:#E4DEEA; --demo-bg:#1C2431;
+  --shadow-sm:0 1px 2px rgba(42,20,64,.06),0 2px 8px rgba(42,20,64,.04);
+  --shadow:0 2px 4px rgba(42,20,64,.06),0 14px 34px rgba(42,20,64,.12);
+}
+body{font-family:var(--font)}
+.phone{background:var(--canvas);box-shadow:0 30px 70px rgba(42,20,64,.25),0 0 0 1px rgba(42,20,64,.06)}
+.screen h1{font-size:1.75em;font-weight:700;letter-spacing:-.025em;line-height:1.1;text-wrap:balance}
+.screen h2{font-size:1.05em;font-weight:700;letter-spacing:-.01em;margin:24px 0 10px}
+.lede{font-weight:500}
+.tiny,.muted,.small{font-weight:500}
+
+/* header and chrome */
+.app-head,.staff-head.app-head{background:rgba(255,255,255,.94);color:var(--ink);padding:14px 16px 12px;border-bottom:1px solid var(--line);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.app-head::before,.app-head::after{display:none}
+.app-head .logo{content:url(img/aim-logo-purple.png);height:54px}
+.app-head .sub{color:var(--purple);font-weight:700;font-size:.7em;letter-spacing:.14em;text-transform:uppercase;margin-top:4px}
+.staff-head.app-head{background:var(--purple-deep);color:#fff;border-bottom:0}
+.staff-head .logo{content:url(img/aim-logo-white.png)}
+.staff-head.app-head .sub{color:#E9DCF3}
+.bell{border:0;background:var(--purple-soft);color:var(--purple-deep);width:42px;height:42px}
+.staff-head .bell{background:rgba(255,255,255,.14);color:#fff}
+.bell .badge{background:var(--bad);color:#fff}
+.head-r .avatar{border:0;box-shadow:0 0 0 2px #fff,0 0 0 3px var(--line-strong)}
+.proto-strip{background:var(--purple-soft);color:var(--purple-deep);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.6em;padding:4px 8px}
+.offline-banner{background:#1E1626}
+
+/* buttons and inputs */
+.btn{border-radius:14px;border:0;background:var(--purple-soft);color:var(--purple-deep);font-weight:700;min-height:48px;box-shadow:none}
+.btn:hover{background:#E6DBF0}
+.btn-primary{background:linear-gradient(180deg,#6A2A8E,var(--purple-deep));color:#fff;box-shadow:0 6px 16px rgba(74,13,102,.25)}
+.btn-primary:hover{background:var(--purple-deep)}
+.btn-ghost{background:transparent;color:var(--purple)}
+.btn-light{background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.4)}
+.btn-light:hover{background:rgba(255,255,255,.26)}
+.btn-danger{background:var(--bad-soft);color:var(--bad)}
+.btn-sm{border-radius:11px;min-height:38px}
+.btn:active{transform:scale(.98)}
+.back{color:var(--purple)}
+.link{text-decoration:none;border-bottom:1.5px solid currentColor;padding-bottom:0;color:var(--purple)}
+.input,select.input,textarea.input{border:1.5px solid var(--line-strong);border-radius:14px;background:#fff}
+.input:focus,select.input:focus,textarea.input:focus{border-color:var(--purple);outline:none;box-shadow:0 0 0 4px var(--purple-soft)}
+.code-input{border-width:2px;letter-spacing:.25em}
+.radios label{border:1.5px solid var(--line);border-radius:99px;background:#fff}
+.radios label:has(input:checked){background:var(--purple-soft);border-color:var(--purple)}
+.chips button{border:0;background:#fff;box-shadow:var(--shadow-sm);border-radius:99px;font-weight:700;color:var(--ink)}
+.chips button.on{background:var(--purple-deep);color:#fff;box-shadow:0 6px 14px rgba(74,13,102,.25)}
+.chips.sub button{background:transparent;box-shadow:none;border:1px solid var(--line-strong)}
+.chips.sub button.on{background:var(--purple-soft);color:var(--purple-deep);border-color:var(--purple)}
+.switch input{background:#D9D2E0}
+.switch input:checked{background:var(--purple)}
+.filters select{border:1.5px solid var(--line-strong);border-radius:12px}
+
+/* pills */
+.pill{border-radius:99px;font-size:.78em;padding:4px 10px;letter-spacing:0}
+.pill.lead{background:#FFF1C9;color:#6B4E00}
+
+/* home */
+.hero.next{background:linear-gradient(150deg,#6B2C93 0%,#4A0D66 60%,#38094E 100%);border:0;border-radius:24px;box-shadow:var(--shadow);padding:20px}
+.hero.next .when{color:#E9DCF3;font-weight:700;font-size:.74em;letter-spacing:.12em;text-transform:uppercase}
+.pulse{background:var(--gold);box-shadow:0 0 0 0 rgba(255,164,0,.6)}
+.daychip{background:rgba(255,255,255,.16);border:0;font-weight:700}
+.hero.next .big{font-size:1.9em;font-weight:700;letter-spacing:-.03em;line-height:1.05}
+.hero.next .sub2{color:#EFE6F5}
+.hero.next .count{display:inline-block;background:var(--gold);color:#2A1A00;border-radius:99px;padding:5px 12px;font-size:.92em;margin-top:6px}
+.dayprog .bar{background:rgba(255,255,255,.2);border-radius:99px;height:8px}
+.dayprog .bar span{background:var(--gold);border-radius:99px}
+.changes{border-left:0;border-radius:var(--radius);background:var(--moved-soft);padding:14px 16px}
+.changes.none{background:var(--ok-soft)}
+.changes h2{font-size:1em;margin:0 0 6px}
+.bus{border:0;border-left:0;border-radius:var(--radius);background:#FFF7E1;box-shadow:var(--shadow-sm)}
+.callout{background:var(--purple-soft);color:var(--purple-deep);border-radius:var(--radius)}
+.quick .btn{background:#fff;color:var(--ink);box-shadow:var(--shadow-sm);border-radius:var(--radius);padding:14px 16px;min-height:66px}
+.quick .btn:hover{background:var(--purple-tint)}
+
+/* cards and lists */
+.card,.contact,.announce,.report,.stat,.result,.menu button,.resrow,.actrow,.detail-head,.meeting,.grp,.actcard,.tl li button,details.prep,.mapwrap,.install,.reach div,.trow,.boardrow,.preview,.phone-mock{border:0;box-shadow:var(--shadow-sm);border-radius:var(--radius)}
+.menu button{padding:16px;min-height:60px}
+.menu button::after{color:var(--purple)}
+.meeting .strip{width:6px}
+.meeting .bbadge{border-radius:12px}
+.meeting .bbadge.house{background:var(--moved)}
+.meeting .bbadge.senate{background:var(--purple)}
+.meeting .time{font-size:1.1em;letter-spacing:-.01em}
+.warnrow{border:0;background:var(--warn-soft);border-radius:14px;color:#5A3200}
+.detail-head{padding:18px}
+.detail-head .time{letter-spacing:-.02em}
+.detail-head h1{font-size:1.4em}
+.tl{border-left-color:var(--line-strong)}
+.tl li.live button{box-shadow:0 0 0 2px var(--moved),var(--shadow-sm)}
+.trow,.boardrow{border-left:6px solid var(--line-strong)}
+.trow.confirmed{border-left-color:var(--ok)}.trow.tentative{border-left-color:var(--warn)}.trow.moved{border-left-color:var(--moved)}.trow.cancelled{border-left-color:var(--bad)}
+.boardrow.live{border-left-color:var(--moved)}.boardrow.done{border-left-color:var(--ok)}.boardrow.late{border-left-color:var(--warn)}.boardrow.off{border-left-color:var(--bad)}
+.rail .item .title::before{border-radius:50%}
+.rail .block{background:var(--purple-soft);color:var(--purple-deep);border-radius:6px;font-weight:700}
+.rail .t{color:var(--purple-deep)}
+.star.on{color:var(--gold)}
+.ph{border:1.5px dashed var(--line-strong);border-radius:14px;background:transparent;font-style:normal}
+.askrow{border:1.5px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm)}
+.askrow.on{border-color:var(--ok)}
+.mode-head{background:linear-gradient(150deg,#6B2C93,#38094E);border-radius:24px;box-shadow:var(--shadow)}
+.steps span{border-radius:99px}
+.err{border-left:0;border-radius:14px;background:var(--bad-soft)}
+.empty{border:1.5px dashed var(--line-strong);border-radius:var(--radius)}
+.totals div{background:#fff;box-shadow:var(--shadow-sm);border-radius:14px}
+.totals b{color:var(--purple-deep)}
+.actrow .kind{border-radius:10px}
+.member{border-radius:99px;border-color:var(--line)}
+.member.lead{background:#FFF1C9;border-color:#EBD48A}
+.msg .bubble{border:0;box-shadow:var(--shadow-sm);border-radius:18px 18px 18px 6px}
+.msg.mine .bubble{background:var(--purple);border-radius:18px 18px 6px 18px}
+.sheet{background:rgba(30,22,38,.4);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.sheet .panel{border-radius:26px 26px 0 0}
+.leg.tight{border-radius:14px}
+.push{border-radius:20px}
+.toast{border-radius:14px}
+
+/* tabs */
+.tabs,.tabs.six{border-top:0;background:rgba(255,255,255,.94);box-shadow:0 -1px 0 var(--line);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.tabs.six button{color:var(--ink-3);font-weight:700;font-size:.66em;letter-spacing:.01em}
+.tabs.six button.on{color:var(--purple-deep)}
+.tabs.six button .ico-svg{border-radius:99px;width:54px;height:30px;padding:4px 16px}
+.tabs.six button.on .ico-svg{background:var(--purple-soft)}
+.tabs .badge{border-radius:99px}
+
+/* staff */
+.stafftabs{background:#fff;border-bottom:1px solid var(--line)}
+.stafftabs button{border-radius:99px;font-weight:700}
+.stafftabs button.on{background:var(--purple-deep);color:#fff}
+.stafftabs .badge{background:var(--bad)}
+.bar{border-radius:99px;background:var(--line)}
+.bar span{background:var(--purple);border-radius:99px}
+
+/* entry */
+.entry .mark{font-size:.78em;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--purple)}
+.entry h1{font-size:1.9em}
+
+/* install layer and live map */
+.install{border-left:0;background:var(--purple-soft);box-shadow:none}
+.gmap-slot{border:0;border-radius:var(--radius);box-shadow:var(--shadow)}
+.gpin{border:0;border-radius:99px;box-shadow:0 2px 8px rgba(0,0,0,.22);font-weight:700;text-transform:none;letter-spacing:0;font-size:12px;padding:4px 9px}
+.gpin.mine{background:var(--purple-deep);color:#fff}
+.gpin.capitol{background:var(--gold);color:#2A1A00}
+.gpin.hotel{background:var(--teal);color:#fff}
+.phone[data-contrast="high"]{--purple:#3C0A52;--purple-deep:#2A0638;--line:#777;--line-strong:#444;--canvas:#fff;--purple-soft:#E6DBF0;--shadow-sm:0 0 0 1px #777;--shadow:0 0 0 2px #000}
+
+/* ---------- Slim header, menu button and the Everything drawer ---------- */
+.app-head,.staff-head.app-head{padding:8px 12px 8px 14px;min-height:54px;align-items:center}
+.app-head .head-l{flex-direction:row;align-items:center;gap:10px}
+.app-head .logo{height:32px;content:url(img/aim-logo-purple.png)}
+.staff-head .logo{content:url(img/aim-logo-white.png)}
+.app-head .sub{margin:0;font-size:.68em;letter-spacing:.12em;padding-left:10px;border-left:1px solid var(--line)}
+.staff-head.app-head .sub{border-left-color:rgba(255,255,255,.35)}
+.head-r{gap:6px}
+.bell{width:40px;height:40px;border-radius:12px}
+.bell.menu-btn{background:var(--purple-deep);color:#fff}
+.bell.menu-btn .bell-svg{width:22px;height:22px}
+.bell.menu-btn.on{background:var(--ink)}
+.proto-strip{font-size:.56em;padding:3px 8px}
+body.app .app-head{padding-top:calc(env(safe-area-inset-top,0px) + 8px)}
+.tabs.five button{font-size:.7em}
+.hub-scrim{position:absolute;inset:0;z-index:25;background:rgba(30,22,38,.35);opacity:0;pointer-events:none;transition:opacity .25s ease}
+.hub-scrim.open{opacity:1;pointer-events:auto}
+.hubsheet{position:absolute;top:0;right:0;bottom:0;width:min(88%,360px);z-index:26;background:var(--canvas);box-shadow:-20px 0 50px rgba(42,20,64,.25);transform:translateX(104%);transition:transform .3s cubic-bezier(.2,.8,.2,1);overflow:auto;padding:calc(env(safe-area-inset-top,0px) + 14px) 14px calc(env(safe-area-inset-bottom,0px) + 24px);display:flex;flex-direction:column;gap:12px;visibility:hidden}
+.hubsheet.open{transform:none;visibility:visible}
+@media (prefers-reduced-motion:reduce){.hubsheet,.hub-scrim{transition:none}}
+.hub-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.avatar-row{display:flex;align-items:center;gap:10px}
+.avatar-row b{display:block;font-size:1.02em;line-height:1.2}
+.hubgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{background:#fff;border:0;border-radius:18px;padding:12px;text-align:left;display:flex;flex-direction:column;gap:5px;min-height:108px;box-shadow:var(--shadow-sm);color:var(--ink)}
+.tile:active{transform:scale(.98)}
+.tile-ico{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--purple-soft);color:var(--purple-deep)}
+.tile-ico svg{width:20px;height:20px}
+.tile b{font-size:.98em;margin-top:2px}
+.tile-sub{font-size:.76em;color:var(--ink-2);line-height:1.3}
+.tile.on{box-shadow:0 0 0 2px var(--purple),var(--shadow-sm)}
+.tile.agenda .tile-ico{background:#DCF0ED;color:#0F6E66}
+.tile.meetings .tile-ico,.tile.map .tile-ico{background:#E0E8F5;color:#1D3F73}
+.tile.act .tile-ico{background:#FCE6DB;color:#B5451B}
+.tile.team .tile-ico{background:#DEF1E4;color:#1F6B3A}
+.tile.alerts .tile-ico,.tile.announcements .tile-ico{background:#FFF1C9;color:#7A4B00}
+.tile.resources .tile-ico,.tile.logistics .tile-ico,.tile.story .tile-ico{background:#EFE4F6;color:#4A0D66}
+.tile.help .tile-ico,.tile.settings .tile-ico,.tile.about .tile-ico{background:#E8E6EE;color:#3E3A4D}
+.hub-foot{margin:auto 0 0;padding-top:6px}
+.phone[data-contrast="high"] .hubsheet{background:#fff}
 
 </style>
 </head>
@@ -3126,6 +3143,127 @@ function boot() {
   }
 }
 boot();
+
+</script>
+<script>
+/* ---------- Daylight: layout overlay. Redefines the shell and Home; every original screen is still reachable. ---------- */
+/* ---------- Redesign helpers (additions only; nothing above is changed) ---------- */
+function rdDayItems(day) {
+  const d = D(); const stars = myStars(); const items = [];
+  d.sessions.filter(s => s.day === day && !s.umbrella && (s.type !== 'breakout' || stars[s.id]))
+    .forEach(s => items.push({ kind: 'session', day, start: s.start, end: s.end, ref: s }));
+  if (day === CONFIG.meetingDay) myMeetings(d).forEach(m => items.push({ kind: 'meeting', day, start: m.start, end: m.end, ref: m }));
+  return items.sort((a, b) => toMin(a.start) - toMin(b.start));
+}
+function rdUpcoming() {
+  const n = simNow(); let all = [];
+  CONFIG.days.filter(x => x.n >= n.day).forEach(x => { all = all.concat(rdDayItems(x.n)); });
+  return all.filter(it => rdPhase(it) !== 'past' && !(it.kind === 'meeting' && it.ref.status === 'cancelled'));
+}
+function rdPhase(it) {
+  const n = simNow(); if (it.day !== n.day) return it.day < n.day ? 'past' : 'later';
+  const s = toMin(it.start) * 60, e = toMin(it.end) * 60;
+  if (n.secs >= e) return 'past'; if (n.secs >= s) return 'now'; return 'later';
+}
+function rdTitle(it) { return it.kind === 'meeting' ? it.ref.member : it.ref.title; }
+function rdWhere(it) { return it.kind === 'meeting' ? `${it.ref.building} ${it.ref.room}` : it.ref.room; }
+function rdAct(it) { return it.kind === 'meeting' ? `data-act="meeting" data-arg="${it.ref.id}"` : `data-act="rdSession" data-arg="${it.ref.day}"`; }
+function rdTypeLabel(t) { return { general: 'General session', breakout: 'Breakout', meal: 'Meal', reception: 'Evening', team: 'State team' }[t] || t; }
+function rdClock() { const n = simNow(); return fmtMin(Math.floor(n.secs / 60)); }
+function rdGreeting() { const h = Math.floor(simNow().secs / 3600); return h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening'; }
+function rdDestinations() {
+  const me = attendee(state.attendeeId); const u = unreadCount();
+  return [
+    { id: 'home', tab: true, label: 'Home', sub: 'What is next' },
+    { id: 'agenda', tab: true, label: 'Agenda', sub: 'All three days' },
+    { id: 'meetings', tab: true, label: 'Meetings', sub: 'Your Hill meetings' },
+    { id: 'map', label: 'Map', sub: 'Buildings and walking times' },
+    { id: 'act', tab: true, label: 'Act', sub: 'Letters, posts, thank-yous' },
+    { id: 'team', tab: true, label: 'Team', sub: 'Groups and delegation' },
+    { id: 'alerts', label: 'Alerts', sub: u ? `${u} unread` : 'All caught up' },
+    { id: 'announcements', label: 'Announcements', sub: `${D().announcements.length} from staff` },
+    { id: 'resources', label: 'Resources', sub: 'Guides, kits, one-pagers' },
+    { id: 'logistics', label: 'Logistics', sub: 'Buses, venue, Wi-Fi' },
+    { id: 'story', label: 'Your story', sub: state.story && state.story[state.attendeeId] ? 'Written' : 'Not written yet' },
+    { id: 'help', label: 'Help and contacts', sub: 'Team lead, staff, help desk' },
+    { id: 'settings', label: 'Alerts and display', sub: `Push alerts ${me && me.pushOptIn ? 'on' : 'off'}. Text size ${state.textSize}.` },
+    { id: 'about', label: 'About this prototype', sub: 'What is real and what is simulated' }
+  ];
+}
+const RD_TABS = ['home', 'agenda', 'meetings', 'act', 'team', 'more'];
+const RD_TAB_OF = { meeting: 'meetings', mode: 'meetings', roles: 'meetings', report: 'meetings', thankyou: 'act', map: 'meetings', action: 'act', onboard: 'more', alerts: 'more', resources: 'more', logistics: 'more', story: 'more', announcements: 'more', help: 'more', settings: 'more', about: 'more' };
+function rdScreens() {
+  return { home: homeScreen, agenda: agendaScreen, meetings: meetingsScreen, meeting: meetingScreen, mode: meetingModeScreen, roles: rolesScreen, report: reportScreen, thankyou: thankyouScreen, map: mapScreen, alerts: alertsScreen, onboard: onboardScreen, act: actScreen, action: actionScreen, team: teamScreen, resources: resourcesScreen, logistics: logisticsScreen, story: storyScreen, more: moreScreen, announcements: announcementsScreen, help: () => helpScreen(false), settings: settingsScreen, about: aboutScreen };
+}
+function rdOpen(id) { if (RD_TABS.includes(id)) actions.tab(id); else go(id); }
+function rdChanges() {
+  const changes = myNotifs().filter(x => x.type === 'change' && !x.read);
+  if (!changes.length) return '';
+  return `<section class="changes" aria-live="polite"><h2>${changes.length} change${changes.length > 1 ? 's' : ''} since you last looked</h2><ul style="margin:0;padding-left:18px">${changes.map(c => `<li><b>${esc(c.title)}.</b> ${esc(c.body)} ${c.meetingId ? `<button class="link" data-act="meeting" data-arg="${c.meetingId}">View</button>` : ''}</li>`).join('')}</ul><button class="btn btn-sm" style="margin-top:10px" data-act="gotit">Got it</button></section>`;
+}
+function rdTodayAction() {
+  const acts = actionsForMe(); const today = acts.find(a => a.group === 'Today' && !actionDone(a)); const doneN = acts.filter(actionDone).length;
+  return { acts, today, doneN };
+}
+Object.assign(actions, {
+  rdSession(day) { state.agendaDay = Number(day); state.screen = 'agenda'; state.arg = null; render(); },
+  rdOpen(id) { state.hubOpen = false; state.menuOpen = false; state.focusIdx = 0; rdOpen(id); }
+});
+/* Live countdowns for any element carrying data-cd="day|start" */
+setInterval(() => {
+  if (state.view !== 'attendee') return;
+  document.querySelectorAll('[data-cd]').forEach(el => { const [d, s] = el.dataset.cd.split('|'); el.textContent = countdownText(Number(d), s); });
+}, 1000);
+
+/* Daylight: slim header with a menu button that slides in the Everything drawer. */
+Object.assign(ICONS, {
+  menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
+  close: '<path d="M6 6l12 12M18 6L6 18"/>',
+  map: '<path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/>',
+  alerts: ICONS.bell,
+  announcements: '<path d="M3 11v2a1 1 0 0 0 1 1h3l6 4V6L7 10H4a1 1 0 0 0-1 1z"/><path d="M17 9a4 4 0 0 1 0 6"/>',
+  resources: '<path d="M4 4h12a2 2 0 0 1 2 2v14H6a2 2 0 0 1-2-2z"/><path d="M4 18a2 2 0 0 1 2-2h12M8 8h6"/>',
+  logistics: '<rect x="3" y="5" width="18" height="12" rx="2"/><path d="M3 11h18M7 17v2M17 17v2M7 8h2M15 8h2"/>',
+  story: '<path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M13 7l3 3"/>',
+  help: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.7"/><path d="M12 17h.01"/>',
+  settings: '<path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="9" cy="17" r="2"/>',
+  about: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>'
+});
+Object.assign(actions, { hub() { state.hubOpen = !state.hubOpen; render(); } });
+function appHead(staff) {
+  const me = state.attendeeId && !staff ? attendee(state.attendeeId) : null; const unread = me ? unreadCount() : 0;
+  const open = !!state.hubOpen;
+  return `<header class="app-head ${staff ? 'staff-head' : ''}">
+    <div class="head-l"><img class="logo" src="${staff ? LOGO_WHITE : LOGO_PURPLE}" alt="AIM, Alzheimer's Impact Movement, Alzheimer's Association"><div class="sub">${staff ? 'Forum staff' : 'Advocacy Forum'}</div></div>
+    <div class="head-r">${me ? `<button class="bell" data-act="go" data-arg="alerts" aria-label="Alerts, ${unread} unread">${icon('bell', 'bell-svg')}${unread ? `<span class="badge">${unread}</span>` : ''}</button><button class="bell menu-btn ${open ? 'on' : ''}" data-act="hub" aria-expanded="${open}" aria-controls="hub" aria-label="${open ? 'Close menu' : 'Menu'}">${icon(open ? 'close' : 'menu', 'bell-svg')}</button>` : ''}</div></header><div class="proto-strip">Prototype: fictional data</div>
+    ${state.offline ? `<div class="offline-banner"><span class="dot"></span><span><b>You are offline.</b> Showing the schedule saved on this phone. Last updated ${esc(D().lastUpdated)}.</span></div>` : ''}`;
+}
+function attendeeShell() {
+  if (!state.attendeeId) return appHead(false) + (state.screen === 'help' ? `<div class="screen" id="screen">${helpScreen(true)}</div>` : entryScreen());
+  const s = state.screen; const fn = rdScreens()[s] || homeScreen; const active = RD_TAB_OF[s] || s; const me = attendee(state.attendeeId);
+  const open = !!state.hubOpen;
+  const tab = (id, label) => `<button class="${active === id ? 'on' : ''}" data-act="rdOpen" data-arg="${id}" aria-current="${active === id ? 'page' : 'false'}">${icon(id)}<span>${label}</span></button>`;
+  const tile = d => `<button class="tile ${d.id} ${active === d.id ? 'on' : ''}" data-act="rdOpen" data-arg="${d.id}"><span class="tile-ico">${icon(ICONS[d.id] ? d.id : 'more')}</span><b>${d.label}</b><span class="tile-sub">${esc(d.sub)}</span></button>`;
+  const drawer = `<div class="hub-scrim ${open ? 'open' : ''}" data-act="hub" aria-hidden="true"></div>
+    <aside class="hubsheet ${open ? 'open' : ''}" id="hub" role="dialog" aria-label="Everything in the app" ${open ? '' : 'inert'}>
+      <div class="hub-head"><div><div class="avatar-row">${avatar(me)}<div><b>${esc(me.name)}</b><div class="tiny">${esc(me.city)}, ${esc(me.state)}. Code ${esc(me.code)}</div></div></div></div><button class="bell menu-btn" data-act="hub" aria-label="Close menu">${icon('close', 'bell-svg')}</button></div>
+      <div class="hubgrid">${rdDestinations().filter(d => d.id !== 'more').map(tile).join('')}</div>
+      <p class="tiny hub-foot"><button class="link" data-act="signout">Sign out</button></p>
+    </aside>`;
+  const body = fn(state.arg).split('data-act="tab" data-arg="more">&#8249; More').join('data-act="hub">&#8249; Menu');
+  return appHead(false) + `<div class="screen" id="screen">${body}</div>${drawer}
+    <nav class="tabs six five" aria-label="Main">${tab('home', 'Home')}${tab('agenda', 'Agenda')}${tab('meetings', 'Meetings')}${tab('act', 'Act')}${tab('team', 'Team')}</nav>`;
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && state.hubOpen) { state.hubOpen = false; render(); } });
+/* Link parameter: ?clock=N opens the app at a demo clock preset (the numbers match CONFIG.clockPresets).
+   demo.html builds its links with it so a QR code can open the app on a non Hill day. */
+(function () {
+  const p = new URLSearchParams(location.search).get('clock'); if (p === null) return;
+  const i = Number(p); if (!CONFIG.clockPresets[i]) return;
+  state.clockPreset = i; state.clockBase = Date.now();
+  if (state.view === 'attendee' && state.attendeeId) { state.screen = 'home'; state.arg = null; state.hubOpen = false; }
+})();
+render();
 
 </script>
 </body>
