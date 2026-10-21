@@ -37,7 +37,8 @@ The live map has not been tested yet, because the environment it was built in ca
 - **Edit on GitHub**, then open `sw.js` and change `VERSION` (for example `forum-demo-1` to `forum-demo-2`). Phones pick up the new version the second time the app is opened after your change, because the first open downloads it in the background.
 - **Home Screen name:** change `short_name` in `manifest.webmanifest`, `apple-mobile-web-app-title` in `index.html`, and `shortName` in `app-config.js`. Names longer than about 12 characters get cut off under the icon on iPhone.
 - **Personas:** the list is near the bottom of `links.html`. Codes must match an attendee in the app's fictional data.
-- **Scenarios by day:** the list is near the bottom of `demo.html`. A link can carry `clock=N`, where N is the index of a preset in `CONFIG.clockPresets` inside `index.html` (0 and 1 are Day 1, 2 to 5 are Hill Day, 6 is Day 3).
+- **Scenarios by day:** the list is near the bottom of `demo.html`. A link can carry `clock=N`, where N is the index of a preset in `CONFIG.clockPresets` inside `index.html` (0 and 1 are Day 1, 2 to 5 are Hill Day, 6 is Day 3, 7 is two weeks before the Forum).
+- **Get ready training:** the eight preparation steps live in the `PREP_MODULES` list near the end of `index.html`. Each step is a title, a time estimate and one or more pages of content. Before Day 1 the checklist is the Home screen; from Day 1 on it sits in the menu drawer. Progress is saved on the phone. The asks and bill details come from `SEED.bills`, so updating those updates the training too.
 - **Look and feel:** the style block in `index.html` is the Daylight theme, and the short script at the very end of the file draws the slim header, the menu button and the Everything drawer. Other screens are untouched.
 - **Hotel pin:** add the venue's name and coordinates to `hotel` in `app-config.js`.
 
