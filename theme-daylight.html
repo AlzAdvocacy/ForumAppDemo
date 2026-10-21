@@ -758,6 +758,54 @@ body.app .app-head{padding-top:calc(env(safe-area-inset-top,0px) + 8px)}
 .hub-foot{margin:auto 0 0;padding-top:6px}
 .phone[data-contrast="high"] .hubsheet{background:#fff}
 
+/* ---------- Get ready: training and checklist ---------- */
+.tile.prep .tile-ico{background:#FFF1C9;color:#7A4B00}
+.phero .dayprog{margin-top:12px}
+.pprog{display:flex;gap:14px;align-items:center;background:var(--paper);border-radius:var(--radius);padding:14px;margin:12px 0 14px;box-shadow:var(--shadow-sm)}
+.pmods{display:flex;flex-direction:column;gap:8px}
+.pmod{display:flex;gap:12px;align-items:center;width:100%;background:var(--paper);border:0;border-radius:var(--radius);padding:12px 14px;text-align:left;min-height:64px;box-shadow:var(--shadow-sm);color:var(--ink)}
+.pmod.next{box-shadow:0 0 0 2px var(--purple),var(--shadow-sm)}
+.pmod.done{opacity:.78}
+.pnum{width:34px;height:34px;border-radius:50%;background:var(--purple-soft);color:var(--purple-deep);display:inline-flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0}
+.pmod.done .pnum{background:var(--ok-soft);color:var(--ok)}
+.pmod.next .pnum{background:var(--purple-deep);color:#fff}
+.pbody{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.pmeta{flex-shrink:0}
+.ppage{margin-top:4px}
+.ppage h2{margin-top:18px}
+.plist{padding-left:20px;margin:8px 0}
+.plist li{margin:6px 0}
+.pcheck{background:var(--paper);border-radius:14px;padding:10px 12px;margin:8px 0;box-shadow:var(--shadow-sm)}
+.pcheck.on{box-shadow:inset 0 0 0 2px var(--ok),var(--shadow-sm)}
+.pnav{display:flex;justify-content:space-between;gap:10px;margin-top:20px;padding-top:14px;border-top:1px solid var(--line)}
+.pnav .btn{min-width:120px}
+.ptimer{display:flex;align-items:center;gap:16px;background:var(--paper);border-radius:var(--radius);padding:14px 16px;margin:12px 0;box-shadow:var(--shadow-sm)}
+.ptimer-n{font-size:2.6em;font-weight:700;letter-spacing:-.04em;font-variant-numeric:tabular-nums;color:var(--purple-deep);min-width:3.2ch}
+.pmoc{margin:0 0 10px}
+.pdd{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px}
+.pdo,.pdont{background:var(--paper);border-radius:var(--radius);padding:12px 14px;box-shadow:var(--shadow-sm)}
+.pdo h3,.pdont h3{margin:0 0 6px;font-size:.8em;letter-spacing:.12em;text-transform:uppercase}
+.pdo h3{color:var(--ok)}
+.pdont h3{color:var(--bad)}
+.pdo ul,.pdont ul{margin:0;padding-left:0;list-style:none}
+.pdo li,.pdont li{position:relative;padding-left:24px;margin:7px 0}
+.pdo li::before{content:"\2713";position:absolute;left:0;top:0;color:var(--ok);font-weight:700}
+.pdont li::before{content:"\2715";position:absolute;left:0;top:0;color:var(--bad);font-weight:700}
+.pquiz{background:var(--paper);border-radius:var(--radius);padding:12px 14px;margin:10px 0;box-shadow:var(--shadow-sm)}
+.pquiz > b{display:block;margin-bottom:8px}
+.popt{display:flex;gap:10px;align-items:flex-start;width:100%;background:var(--canvas);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;margin:6px 0;text-align:left;color:var(--ink)}
+.popt .pk{width:24px;height:24px;border-radius:50%;background:var(--purple-soft);color:var(--purple-deep);display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:.8em;flex-shrink:0}
+.popt.right{border-color:var(--ok);background:var(--ok-soft)}
+.popt.right .pk{background:var(--ok);color:#fff}
+.popt.right.soft{background:var(--paper)}
+.popt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.popt.wrong .pk{background:var(--bad);color:#fff}
+.pwhy{margin-top:8px;padding:10px 12px;border-radius:12px;background:var(--warn-soft);color:#5A3200;font-size:.95em}
+.pwhy.ok{background:var(--ok-soft);color:#14532D}
+.proles dt{font-weight:700;color:var(--ink)}
+.proles dd{font-weight:400;color:var(--ink-2)}
+.pday li button{min-height:60px}
+
 </style>
 </head>
 <body>
@@ -3215,9 +3263,172 @@ setInterval(() => {
   document.querySelectorAll('[data-cd]').forEach(el => { const [d, s] = el.dataset.cd.split('|'); el.textContent = countdownText(Number(d), s); });
 }, 1000);
 
+/* ---------- Get ready: guided training and checklist for advocates ----------
+   Before the Forum it is the Home screen. Once the Forum starts it moves to the menu drawer.
+   Progress is saved on the phone like everything else in state. All content is placeholder
+   or generic; the policy team owns the real asks and talking points. */
+CONFIG.clockPresets.push({ label: 'Two weeks before the Forum, 6:30 PM', day: -13, time: '18:30' });
+function prepPhase() { return simNow().day < 1 ? 'before' : 'during'; }
+function prepDaysToGo() { return Math.max(0, 1 - simNow().day); }
+function prepDone() { state.prep = state.prep || {}; return state.prep[state.attendeeId] = state.prep[state.attendeeId] || {}; }
+function prepChecks() { state.prepChecks = state.prepChecks || {}; return state.prepChecks[state.attendeeId] = state.prepChecks[state.attendeeId] || {}; }
+function prepQuizAnswers() { state.prepQuiz = state.prepQuiz || {}; return state.prepQuiz[state.attendeeId] = state.prepQuiz[state.attendeeId] || {}; }
+function pcheck(key, label, sub) { const on = !!prepChecks()[key]; return `<label class="check pcheck ${on ? 'on' : ''}"><input type="checkbox" data-change="prepcheck" data-key="${key}" ${on ? 'checked' : ''}><span><b>${label}</b>${sub ? `<br><span class="small muted">${sub}</span>` : ''}</span></label>`; }
+function pbillState(v) { return v === 'yes' ? '<span class="pill confirmed">Supports</span>' : v === 'no' ? '<span class="pill off">Not yet</span>' : '<span class="pill tentative">Unknown</span>'; }
+
+const PREP_MODULES = [
+  { id: 'asks', title: 'Know the asks', minutes: 5, blurb: 'The three things we ask every office for, and how to say them in your own words.',
+    pages: [
+      () => `<p class="lede">Every Hill meeting ends with the same asks. You do not need to be a policy expert. You need to be a constituent who cares and can say these three things plainly.</p>
+        ${SEED.bills.map((b, i) => `<details class="prep" ${i === 0 ? 'open' : ''}><summary>${i + 1}. ${esc(b.title)}</summary><div class="inner"><p>${esc(b.detail)}</p></div></details>`).join('')}
+        <p class="tiny">Placeholder text. The policy team provides the final asks and one-pagers before the Forum.</p>`,
+      () => `<h2>Say it your way</h2><p>A question lands better than a speech. Try the shape: <b>thanks, one reason it matters to you, the ask as a question.</b></p>
+        <div class="callout"><b>Example.</b> "Thank you for meeting with us. My mother lived with Alzheimer's for nine years, and research funding is personal for our family. Will the Senator support [dollar amount] for research in the next appropriations bill?"</div>
+        <h3>Practice out loud</h3><p class="small muted">Say each ask once, in a sentence you would actually use. Then tick it off.</p>
+        ${SEED.bills.map(b => pcheck('ask_' + b.id, esc(b.short), 'Said it out loud in my own words')).join('')}
+        <p class="tiny">Inside each meeting page the app shows where that office already stands on each ask, so you know which one to lead with.</p>` ] },
+  { id: 'story', title: 'Your story in three minutes', minutes: 10, blurb: 'Write the short version, then practice it against a timer.',
+    pages: [
+      () => `<p class="lede">Offices hear statistics all day. They remember people. Your story is the part of the meeting only you can do.</p>
+        <h2>A shape that works</h2><ol class="plist"><li><b>Who.</b> One sentence about the person: your mother, your husband, you.</li><li><b>One moment.</b> A single scene that still sticks with you. Not the whole history.</li><li><b>The bridge.</b> One line that connects it to the ask: "That is why research funding matters to my family."</li></ol>
+        <p class="small muted">Aim for two to three minutes. Shorter is fine. Longer is not.</p>`,
+      () => `<h2>Write the short version</h2><p class="small muted">Three or four sentences. It is saved on this phone as you type, and it shows up in meeting mode and starts your letters.</p>
+        <textarea class="input notes big" data-input="story" placeholder="Who you are, who you care about, and one moment that explains why you are here.">${esc(state.story[state.attendeeId] || '')}</textarea>
+        <p class="tiny">Private until you say it out loud. Staff cannot see it.</p>`,
+      () => { const end = state.prepTimerEnd || 0; const left = Math.max(0, Math.round((end - Date.now()) / 1000)); const running = end > Date.now();
+        return `<h2>Practice against the clock</h2><p>Stand up, start the timer, and say it to the wall. Then once more to a person.</p>
+        <div class="ptimer"><div class="ptimer-n" id="prep-timer">${running ? `${Math.floor(left / 60)}:${String(left % 60).padStart(2, '0')}` : '3:00'}</div><button class="btn ${running ? '' : 'btn-primary'}" data-act="prepTimer">${running ? 'Stop' : 'Start three minutes'}</button></div>
+        <ul class="plist small"><li>Look up, not at your phone.</li><li>Pause after the moment. Let it land.</li><li>It is fine to get emotional. It is also fine not to.</li><li>End on the bridge line, then stop.</li></ul>
+        ${pcheck('story_once', 'Said it out loud once', 'To a wall, a mirror, or a pet')}${pcheck('story_person', 'Said it to another person', 'A friend, a family member, or your team lead')}`; } ] },
+  { id: 'moc', title: 'Know your Members of Congress', minutes: 5, blurb: 'Who you are meeting, where they stand, and one thing to thank them for.',
+    pages: [
+      () => { const mine = myMeetings().filter(m => m.status !== 'cancelled');
+        if (!mine.length) return `<p class="lede">Your meetings are not assigned yet. Staff add them before Hill Day, and this page fills in on its own.</p><div class="callout">Meanwhile, look up who represents you and read their committee assignments. The staff help desk can point you to the right place.</div><div class="ph">[Link to the Member lookup goes here]</div>`;
+        return `<p class="lede">Read each office before you walk in. Two minutes per Member is plenty.</p>${mine.map(m => `<div class="card pmoc"><div class="row between"><b>${esc(m.member)}</b><span class="tiny">${m.party === 'D' ? 'Democrat' : 'Republican'}, ${esc(m.seat)}</span></div>
+          <p class="small" style="margin:6px 0">${esc(m.profile || '')}</p>
+          ${m.lastMet ? `<p class="small muted" style="margin:0 0 8px"><b>Last time:</b> ${esc(m.lastMet)}</p>` : ''}
+          ${m.bills ? `<div class="bills">${SEED.bills.map(b => `<div class="bill"><span class="small">${esc(b.short)}</span>${pbillState(m.bills[b.id])}</div>`).join('')}</div>` : ''}
+          <button class="link" data-act="meeting" data-arg="${m.id}">Open the meeting page</button></div>`).join('')}`; },
+      () => `<h2>What to look for</h2><ul class="plist"><li><b>Committees.</b> A Member on a health or appropriations committee can move our asks directly.</li><li><b>Past support.</b> If they already cosponsored, lead with thanks, then ask for the next step.</li><li><b>A personal connection.</b> Many Members have spoken about dementia in their own family. Mention it if they have.</li><li><b>What the office asked us last time.</b> Bring the answer.</li></ul>
+        <h3>One thank-you line per office</h3><p class="small muted">Write it on the meeting page under notes, or say it here out loud.</p>
+        ${pcheck('moc_read', 'Read every profile', 'And the "last time" note if there is one')}${pcheck('moc_thanks', 'Have a thank-you line for each office', 'Even an office that has not supported us yet took the meeting')}` ] },
+  { id: 'aim', title: 'Create your AIM account', minutes: 3, blurb: 'So your letters, actions and alerts keep working after the Forum.',
+    pages: [
+      () => `<p class="lede">AIM, the Alzheimer's Impact Movement, is the Association's advocacy arm. An AIM account is how you send letters, track your actions and hear about votes once you are home.</p>
+        <ol class="plist"><li>Open the sign-up page and use the same email you registered for the Forum with, so your meetings and actions connect.</li><li>Pick text alerts if you want a buzz when a vote is coming.</li><li>Come back here and tick the box.</li></ol>
+        <div class="ph">[AIM sign-up link goes here]</div>
+        ${pcheck('aim_account', 'I have an AIM account', 'Same email as my Forum registration')}
+        <p class="tiny">In the real app this opens the sign-up page in your browser. The prototype only shows the placeholder.</p>` ] },
+  { id: 'dos', title: 'Dos and don\'ts in the room', minutes: 7, blurb: 'Meeting etiquette, then three quick scenarios to test yourself.',
+    pages: [
+      () => `<p class="lede">Most meetings are with a staffer, last 15 to 20 minutes, and happen in a hallway or a small office. Here is what works.</p>
+        <div class="pdd"><div class="pdo"><h3>Do</h3><ul>${SEED.prep.tips.map(t => `<li>${esc(t)}</li>`).join('')}<li>Ask what would help the office say yes.</li><li>Write down anything they ask for. Then follow up within a week.</li></ul></div>
+        <div class="pdont"><h3>Don't</h3><ul><li>Argue, even if you disagree. You are building a relationship, not winning a debate.</li><li>Guess at numbers or bill details. "I will follow up" is a complete answer.</li><li>Talk over your team. One voice at a time, and let the lead close.</li><li>Bring up other issues or candidates. Stay on our asks.</li><li>Leave without the asks. Even a short meeting ends with the question.</li></ul></div></div>`,
+      () => {
+        const Q = [
+          { id: 'q1', text: 'The staffer says the Member "cannot commit today." You:', opts: [['a', 'Press harder. They need to hear how serious this is.'], ['b', 'Thank them, ask what information would help, and offer to follow up.'], ['c', 'Wrap up early. There is no point continuing.']], ok: 'b', why: 'A "not today" is normal. Asking what would help keeps the door open and gives you a reason to follow up.' },
+          { id: 'q2', text: 'You are asked a detailed question about the bill text and you are not sure. You:', opts: [['a', 'Give your best guess so you do not look unprepared.'], ['b', 'Say you will find out and follow up, and write the question down.'], ['c', 'Change the subject to your story.']], ok: 'b', why: 'Offices respect "I will follow up" far more than a wrong answer. It is also your best excuse to contact them again.' },
+          { id: 'q3', text: 'The meeting is running long and the staffer looks at the clock. You:', opts: [['a', 'Speed up and skip the asks.'], ['b', 'Keep going. You travelled a long way for this.'], ['c', 'Let the team lead move to the asks and the leave-behind, then thank them and go.']], ok: 'c', why: 'Respecting their time is part of the relationship. The asks and the one-pager are the two things that must not be skipped.' }
+        ];
+        const ans = prepQuizAnswers();
+        return `<h2>Three quick scenarios</h2><p class="small muted">Tap an answer. There is no score, just the reasoning.</p>${Q.map((q, i) => `<div class="pquiz"><b>${i + 1}. ${esc(q.text)}</b>${q.opts.map(([k, t]) => { const chosen = ans[q.id] === k; const cls = chosen ? (k === q.ok ? 'right' : 'wrong') : (ans[q.id] && k === q.ok ? 'right soft' : ''); return `<button class="popt ${cls}" data-act="prepQuiz" data-arg="${q.id}|${k}"><span class="pk">${k.toUpperCase()}</span><span>${esc(t)}</span></button>`; }).join('')}${ans[q.id] ? `<div class="pwhy ${ans[q.id] === q.ok ? 'ok' : ''}">${ans[q.id] === q.ok ? 'Right.' : 'Not quite.'} ${esc(q.why)}</div>` : ''}</div>`).join('')}`; },
+      () => `<h2>Keep in your pocket</h2><ul class="plist"><li>Thanks first, story second, asks last.</li><li>One voice at a time. The lead opens and closes.</li><li>"I will follow up" is a complete answer.</li><li>Leave the one-pager, take a photo if they agree, write down what they asked for.</li></ul>
+        ${pcheck('dos_read', 'Read the dos and don\'ts', '')}${pcheck('dos_quiz', 'Tried the three scenarios', '')}` ] },
+  { id: 'day', title: 'How Hill Day runs', minutes: 5, blurb: 'Buses, security, check-ins, your role in the room, and what happens after.',
+    pages: [
+      () => `<p class="lede">The day has a rhythm. Once you know it, the Hill is a lot less intimidating.</p>
+        <ol class="tl pday"><li><button data-act="go" data-arg="logistics"><span class="tl-t">Morning</span><span class="tl-b"><b>Buses from the hotel</b><span class="tiny">Every 15 minutes. Allow 25 minutes door to door, plus a security line.</span></span></button></li>
+        <li><button data-act="go" data-arg="map"><span class="tl-t">Arrive</span><span class="tl-b"><b>Find the building</b><span class="tiny">Senate offices north of the Capitol, House offices south. The map has walking times.</span></span></button></li>
+        <li><button data-act="tab" data-arg="meetings"><span class="tl-t">Meeting</span><span class="tl-b"><b>Check in from meeting mode</b><span class="tiny">So staff and your team know where you are. Then thanks, story, asks.</span></span></button></li>
+        <li><button data-act="tab" data-arg="act"><span class="tl-t">After</span><span class="tl-b"><b>Send a short report</b><span class="tiny">How it went, anything the office asked for. Thank-you notes start from it.</span></span></button></li></ol>`,
+      () => { const mine = myMeetings().filter(m => m.status !== 'cancelled');
+        const roles = mine.map(m => ({ m, r: rolesFor(m, state.attendeeId) })).filter(x => x.r.length);
+        return `<h2>Your role in the room</h2><p>Each meeting group shares the work. Someone opens, one or two people share a story, someone makes the asks, and the lead closes.</p>
+        <dl class="kv proles"><dt>Opens</dt><dd>Introduces the group and thanks the office.</dd><dt>Story</dt><dd>Two to three minutes. The part they remember.</dd><dt>Asks</dt><dd>The three questions, plainly.</dd><dt>Closes</dt><dd>Leaves the one-pager, confirms follow-ups, thanks them again.</dd></dl>
+        ${roles.length ? `<h3>Your assignments so far</h3>${roles.map(x => `<div class="card pmoc row between"><span><b>${esc(x.m.member)}</b><br><span class="tiny">${fmtTime(x.m.start)}, ${esc(x.m.building)} ${esc(x.m.room)}</span></span><span class="pill lead">${x.r.join(', ')}</span></div>`).join('')}` : `<div class="callout">Roles are set by your team lead at the state team meeting on Day 1. They will show here and in each meeting page.</div>`}
+        ${pcheck('day_flow', 'I know the rhythm of the day', '')}${pcheck('day_role', 'I know what I will do in the room', 'Or I will ask my team lead at the state meeting')}`; } ] },
+  { id: 'phone', title: 'Set up your phone', minutes: 2, blurb: 'Alerts on, app on your Home Screen, and your group thread found.',
+    pages: [
+      () => { const me = attendee(state.attendeeId); return `<p class="lede">Schedule changes come by text, and by a buzz if alerts are on. Two minutes now saves a missed meeting later.</p>
+        <div class="menu"><button data-act="go" data-arg="alerts">Alerts<small>${me.pushOptIn ? 'Push alerts are on' : 'Turn on push alerts'}</small></button><button data-act="tab" data-arg="team">Team<small>Find your meeting groups and the ${esc(me.state)} delegation thread</small></button><button data-act="go" data-arg="settings">Alerts and display<small>Larger text and high contrast if you want them</small></button></div>
+        ${pcheck('phone_home', 'App is on my Home Screen', isStandalone() ? 'It is. You opened it from there.' : 'Share, then Add to Home Screen')}${pcheck('phone_alerts', 'Alerts are on', me.pushOptIn ? 'They are.' : 'Or I am fine with texts only')}${pcheck('phone_team', 'Found my group thread under Team', '')}`; } ] },
+  { id: 'pack', title: 'Pack and plan', minutes: 2, blurb: 'What to bring, what to wear, and what to leave at the hotel.',
+    pages: [
+      () => `<p class="lede">The Hill involves more walking and more waiting than people expect.</p>
+        ${pcheck('pack_id', 'Photo ID', 'Needed for building security')}${pcheck('pack_shoes', 'Comfortable shoes', 'Marble floors and long hallways')}${pcheck('pack_water', 'Water and a snack', 'Meetings can run back to back')}${pcheck('pack_charger', 'Phone charger or battery', 'The app works offline, your battery does not')}${pcheck('pack_cards', 'A way to share your contact details', 'Business card, or your details written down')}${pcheck('pack_layers', 'A layer', 'Buildings run cold, the walk between them does not')}
+        <p class="tiny">Your team lead carries the printed one-pagers. You do not need to print anything.</p>` ] }
+];
+function prepModule(id) { return PREP_MODULES.find(m => m.id === id); }
+function prepProgress() { const d = prepDone(); const done = PREP_MODULES.filter(m => d[m.id]).length; return { done, total: PREP_MODULES.length, next: PREP_MODULES.find(m => !d[m.id]) }; }
+function prepDestination() { const p = prepProgress(); return { id: 'prep', label: 'Get ready', sub: p.done === p.total ? 'All steps done' : `${p.done} of ${p.total} steps done` }; }
+function prepTabOf() { RD_TAB_OF.prep = RD_TAB_OF.prepStep = prepPhase() === 'before' ? 'home' : 'more'; }
+function prepBack() { return prepPhase() === 'before' ? `<button class="back" data-act="rdOpen" data-arg="home">&#8249; Home</button>` : `<button class="back" data-act="hub">&#8249; Menu</button>`; }
+
+function prepScreen() {
+  const p = prepProgress(); const d = prepDone(); const before = prepPhase() === 'before';
+  return `${prepBack()}<h1>Get ready for the Forum</h1>
+    <p class="lede">${before ? `${prepDaysToGo()} days to go. ` : ''}Eight short steps, about ${PREP_MODULES.reduce((a, m) => a + m.minutes, 0)} minutes in total. Do them in any order; the order below is the one we suggest.</p>
+    <section class="pprog"><div>${ring(p.done / p.total, 64, `${p.done} of ${p.total} steps done`)}</div><div style="flex:1;min-width:0"><div class="tiny">Your progress</div><b>${p.done === p.total ? 'You are ready.' : `${p.done} of ${p.total} steps done`}</b><div class="small muted">${p.next ? `Next: ${esc(p.next.title)}, about ${p.next.minutes} min` : 'Come back any time to brush up.'}</div>${p.next ? `<button class="btn btn-sm btn-primary" style="margin-top:8px" data-act="prepOpen" data-arg="${p.next.id}">${p.done ? 'Continue' : 'Start'}</button>` : ''}</div></section>
+    <div class="pmods">${PREP_MODULES.map((m, i) => `<button class="pmod ${d[m.id] ? 'done' : ''} ${p.next && p.next.id === m.id ? 'next' : ''}" data-act="prepOpen" data-arg="${m.id}"><span class="pnum">${d[m.id] ? '&#10003;' : i + 1}</span><span class="pbody"><b>${esc(m.title)}</b><span class="small muted">${esc(m.blurb)}</span></span><span class="pmeta">${d[m.id] ? '<span class="pill confirmed">Done</span>' : (p.next && p.next.id === m.id ? '<span class="pill">Up next</span>' : `<span class="tiny">${m.minutes} min</span>`)}</span></button>`).join('')}</div>
+    <p class="tiny">Progress is saved on this phone. <button class="link" data-act="prepReset">Start over</button></p>`;
+}
+function prepStepScreen(id) {
+  const m = prepModule(id) || PREP_MODULES[0]; const page = Math.min(state.prepPage || 0, m.pages.length - 1); const last = page === m.pages.length - 1; const done = !!prepDone()[m.id];
+  const idx = PREP_MODULES.indexOf(m);
+  return `<button class="back" data-act="rdOpen" data-arg="prep">&#8249; Get ready</button>
+    <div class="steps" aria-hidden="true">${m.pages.map((_, i) => `<span class="${i <= page ? 'on' : ''}"></span>`).join('')}</div>
+    <div class="tiny">Step ${idx + 1} of ${PREP_MODULES.length}. About ${m.minutes} min</div>
+    <h1>${esc(m.title)}</h1>
+    <div class="ppage">${m.pages[page]()}</div>
+    <div class="pnav">${page > 0 ? `<button class="btn" data-act="prepPage" data-arg="${page - 1}">&#8249; Back</button>` : `<span></span>`}${last
+      ? `<button class="btn btn-primary" data-act="prepMark" data-arg="${m.id}">${done ? 'Done. Back to the list' : 'Mark as done'}</button>`
+      : `<button class="btn btn-primary" data-act="prepPage" data-arg="${page + 1}">Next &#8250;</button>`}</div>
+    ${!last && !done ? '' : ''}`;
+}
+Object.assign(actions, {
+  prepOpen(id) { state.prepPage = 0; state.hubOpen = false; go('prepStep', id); },
+  prepPage(n) { state.prepPage = Number(n); state._keepScroll = false; render(); const sc = $('#screen'); if (sc) sc.scrollTop = 0; },
+  prepMark(id) { const d = prepDone(); const was = !!d[id]; d[id] = true; state.prepPage = 0; go('prep'); if (!was) { const p = prepProgress(); showToast(p.done === p.total ? 'That is all eight. You are ready.' : `${p.done} of ${p.total} done.`); } },
+  prepReset() { state.prep[state.attendeeId] = {}; state.prepChecks[state.attendeeId] = {}; state.prepQuiz[state.attendeeId] = {}; render(); showToast('Progress cleared.'); },
+  prepQuiz(arg) { const [q, k] = arg.split('|'); prepQuizAnswers()[q] = k; state._keepScroll = true; render(); },
+  prepTimer() { if (state.prepTimerEnd && state.prepTimerEnd > Date.now()) state.prepTimerEnd = 0; else state.prepTimerEnd = Date.now() + 180000; state._keepScroll = true; render(); }
+});
+document.addEventListener('change', e => { const el = e.target.closest('[data-change="prepcheck"]'); if (!el) return; prepChecks()[el.dataset.key] = el.checked; state._keepScroll = true; render(); });
+setInterval(() => { const el = $('#prep-timer'); if (!el || !state.prepTimerEnd) return; const left = Math.round((state.prepTimerEnd - Date.now()) / 1000); if (left <= 0) { state.prepTimerEnd = 0; el.textContent = '0:00'; showToast('Three minutes. Nicely done.'); state._keepScroll = true; render(); return; } el.textContent = `${Math.floor(left / 60)}:${String(left % 60).padStart(2, '0')}`; }, 500);
+
+/* Screens and the Home takeover before the Forum */
+const _rdScreensBase = rdScreens;
+rdScreens = function () { return Object.assign(_rdScreensBase(), { prep: prepScreen, prepStep: prepStepScreen }); };
+const _homeDuringEvent = homeScreen;
+homeScreen = function () {
+  if (prepPhase() !== 'before') return _homeDuringEvent();
+  const me = attendee(state.attendeeId); const p = prepProgress(); const mine = myMeetings().filter(m => m.status !== 'cancelled');
+  const first = D().sessions.filter(s => s.day === 1 && !s.umbrella).sort((a, b) => toMin(a.start) - toMin(b.start))[0];
+  const days = prepDaysToGo();
+  return `<h1>Hi ${esc(firstName(me))}</h1><p class="lede">${days} day${days === 1 ? '' : 's'} to the Forum. ${esc(stateName(me.state))} delegation, ${teamMembers(me.state).length} strong.</p>
+    <div class="hero next phero"><div class="row between"><div class="when"><span class="pulse" aria-hidden="true"></span>Get ready</div><span class="daychip">${days} days</span></div>
+      <div class="big">${p.done === p.total ? 'You are ready.' : `${p.done} of ${p.total} steps done`}</div>
+      <div class="sub2">${p.next ? `Next: ${esc(p.next.title)}, about ${p.next.minutes} minutes.` : 'Brush up any time before Hill Day.'}</div>
+      <div class="dayprog"><div class="bar"><span style="width:${Math.round(p.done / p.total * 100)}%"></span></div></div>
+      <div class="row" style="margin-top:12px;gap:8px">${p.next ? `<button class="btn btn-sm btn-light" data-act="prepOpen" data-arg="${p.next.id}">${p.done ? 'Continue' : 'Start'}</button>` : ''}<button class="btn btn-sm btn-light" data-act="rdOpen" data-arg="prep">All steps</button></div></div>
+    ${rdChanges()}
+    <h2>What to expect</h2>
+    <div class="card"><div class="row between"><b>Day 1</b><span class="tiny">${first ? `Doors open ${fmtTime(first.start)}` : ''}</span></div><div class="small muted">Registration, the expo, the Welcome Program, then Hill Meeting Prep with your state delegation.</div></div>
+    <div class="card"><div class="row between"><b>Hill Day</b><span class="tiny">${mine.length ? `${mine.length} meeting${mine.length === 1 ? '' : 's'} so far` : 'Meetings coming'}</span></div><div class="small muted">${mine.length ? mine.map(m => esc(m.member)).join(', ') + '.' : 'Staff assign meetings before the Forum. They show up here and under Meetings.'}</div></div>
+    <div class="card"><div class="row between"><b>Day 3</b><span class="tiny">Morning</span></div><div class="small muted">Closing sessions, lunch to go, and the actions that continue when you are home.</div></div>
+    <h2>Go to</h2>
+    <div class="quick">
+      <button class="btn" data-act="tab" data-arg="agenda">Agenda<small>All three days</small></button>
+      <button class="btn" data-act="tab" data-arg="team">Team<small>The ${esc(me.state)} delegation</small></button>
+      <button class="btn" data-act="go" data-arg="resources">Resources<small>Guides, kits, one-pagers</small></button>
+      <button class="btn" data-act="go" data-arg="help">Help<small>People to call</small></button>
+    </div>`;
+};
+
 /* Daylight: slim header with a menu button that slides in the Everything drawer. */
 Object.assign(ICONS, {
   menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
+  prep: '<path d="M9 5h10v15H5V5h4"/><path d="M9 3h6v4H9zM8 12l2 2 4-4"/>',
   close: '<path d="M6 6l12 12M18 6L6 18"/>',
   map: '<path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/>',
   alerts: ICONS.bell,
@@ -3240,6 +3451,7 @@ function appHead(staff) {
 }
 function attendeeShell() {
   if (!state.attendeeId) return appHead(false) + (state.screen === 'help' ? `<div class="screen" id="screen">${helpScreen(true)}</div>` : entryScreen());
+  if (typeof prepTabOf === 'function') prepTabOf();
   const s = state.screen; const fn = rdScreens()[s] || homeScreen; const active = RD_TAB_OF[s] || s; const me = attendee(state.attendeeId);
   const open = !!state.hubOpen;
   const tab = (id, label) => `<button class="${active === id ? 'on' : ''}" data-act="rdOpen" data-arg="${id}" aria-current="${active === id ? 'page' : 'false'}">${icon(id)}<span>${label}</span></button>`;
@@ -3247,7 +3459,7 @@ function attendeeShell() {
   const drawer = `<div class="hub-scrim ${open ? 'open' : ''}" data-act="hub" aria-hidden="true"></div>
     <aside class="hubsheet ${open ? 'open' : ''}" id="hub" role="dialog" aria-label="Everything in the app" ${open ? '' : 'inert'}>
       <div class="hub-head"><div><div class="avatar-row">${avatar(me)}<div><b>${esc(me.name)}</b><div class="tiny">${esc(me.city)}, ${esc(me.state)}. Code ${esc(me.code)}</div></div></div></div><button class="bell menu-btn" data-act="hub" aria-label="Close menu">${icon('close', 'bell-svg')}</button></div>
-      <div class="hubgrid">${rdDestinations().filter(d => d.id !== 'more').map(tile).join('')}</div>
+      <div class="hubgrid">${(() => { const ds = rdDestinations().filter(d => d.id !== 'more'); if (typeof prepDestination === 'function') ds.splice(1, 0, prepDestination()); return ds; })().map(tile).join('')}</div>
       <p class="tiny hub-foot"><button class="link" data-act="signout">Sign out</button></p>
     </aside>`;
   const body = fn(state.arg).split('data-act="tab" data-arg="more">&#8249; More').join('data-act="hub">&#8249; Menu');

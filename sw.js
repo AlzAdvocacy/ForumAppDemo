@@ -1,6 +1,6 @@
 /* Offline support. Change VERSION whenever you upload new files so every
    phone refreshes its saved copy on the next launch. */
-const VERSION = 'forum-demo-3';
+const VERSION = 'forum-demo-4';
 const CORE = [
   './', './index.html', './links.html', './demo.html', './app-config.js', './manifest.webmanifest', './vendor/qrcode.js',
   './img/aim-logo-white.png', './img/aim-logo-purple.png',

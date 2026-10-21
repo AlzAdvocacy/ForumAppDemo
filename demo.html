@@ -43,6 +43,7 @@ h1{font-weight:700;font-size:clamp(1.8rem,4vw,2.5rem);letter-spacing:-.025em;lin
 h2{font-weight:700;font-size:1.3rem;letter-spacing:-.015em;margin:34px 0 4px;display:flex;align-items:center;gap:12px}
 h2 .num{flex-shrink:0;width:40px;height:40px;border-radius:14px;background:var(--purple-deep);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.95rem;letter-spacing:.02em}
 h2 .num.gold{background:var(--gold);color:#2A1A00}
+h2 .num.before{background:var(--purple-soft);color:var(--purple-deep);box-shadow:inset 0 0 0 2px var(--purple-deep)}
 h2 .num.staff{background:#1E1626}
 .daysub{color:var(--ink-2);margin:0 0 14px;max-width:70ch;padding-left:52px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
@@ -86,7 +87,7 @@ h2 .num.staff{background:#1E1626}
   <h1>Pick a person and a moment in the week</h1>
   <p class="lede">Each link opens the app as one fictional attendee with the demo clock set to a particular day and time, so you can show what the app looks like before Hill Day, during it, and on the way home. Point a phone camera at the code, or copy the link into a text message.</p>
   <p class="note">The clock is simulated: Hill Day is always "today", Day 1 is yesterday and Day 3 is tomorrow. Opening a link resets the clock on that phone. Tap the AIM logo three times inside the app to change it again. Every name, meeting and schedule is fictional.</p>
-  <div class="legend"><span><b>1</b>Arrival day</span><span><b>2</b>Hill Day</span><span><b>3</b>Going home</span><span><b>S</b>Staff view</span></div>
+  <div class="legend"><span><b>0</b>Before the Forum</span><span><b>1</b>Arrival day</span><span><b>2</b>Hill Day</span><span><b>3</b>Going home</span><span><b>S</b>Staff view</span></div>
 </div></section>
 <main><div class="wrap">
 
@@ -118,8 +119,12 @@ h2 .num.staff{background:#1E1626}
 <script>
 /* Clock presets match CONFIG.clockPresets in index.html, by index:
    0 Day 1, 3:40 PM   1 Day 1, 7:15 PM   2 Hill Day, 7:45 AM   3 Hill Day, 8:05 AM
-   4 Hill Day, 11:20 AM   5 Hill Day, real time   6 Day 3, 8:30 AM */
+   4 Hill Day, 11:20 AM   5 Hill Day, real time   6 Day 3, 8:30 AM   7 Two weeks before, 6:30 PM */
 const DAYS = [
+  { num: '0', cls: 'before', title: 'Before the Forum. Two weeks out', sub: 'Home becomes the Get ready checklist: eight short training steps covering the asks, your story, your Members of Congress, an AIM account, meeting dos and don\'ts, how Hill Day runs, your phone and what to pack. Once the Forum starts it moves to the menu.', items: [
+    { q: 'c=K7Q4M2&clock=7', code: 'K7Q4M2', time: '14 days out, 6:30 PM', name: 'Denise Carver', who: 'Ohio. Ambassador.', shows: 'The guided training with her three meetings already assigned, so the Members of Congress step shows real profiles and where each office stands.' },
+    { q: 'c=Z2W7L4&clock=7', code: 'Z2W7L4', time: '14 days out, 6:30 PM', name: 'Harold Pike', who: 'Georgia. First-time advocate.', shows: 'The same training before any meetings are assigned. Good for showing what a first-timer sees in the weeks before.' }
+  ] },
   { num: '1', title: 'Day 1. Arrival day, not a Hill day', sub: 'Registration, the expo, the Welcome Program and Hill Meeting Prep with your state. Home shows the next agenda item instead of meetings, and the Agenda tab opens on Day 1.', items: [
     { q: 'c=K7Q4M2&clock=0', code: 'K7Q4M2', time: 'Day 1, 3:40 PM', name: 'Denise Carver', who: 'Ohio. Ambassador.', shows: 'The afternoon before Hill Day. Welcome Program is up next with a countdown, then Hill Meeting Prep with the Ohio delegation at 5:30.' },
     { q: 'c=T5M9K2&clock=1', code: 'T5M9K2', time: 'Day 1, 7:15 PM', name: 'Gwen Adebayo', who: 'Ohio. First-time advocate.', shows: 'The evening before. A first-timer with phone alerts off, so updates reach her by text only. Good for showing the alerts opt-in flow.' },
