@@ -3263,6 +3263,53 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape' && state.hubO
   state.clockPreset = i; state.clockBase = Date.now();
   if (state.view === 'attendee' && state.attendeeId) { state.screen = 'home'; state.arg = null; state.hubOpen = false; }
 })();
+
+/* ---------- Phone niceties: haptic taps and an in-app back button ---------- */
+/* Haptics: a short tick on every tap of a button, tab or tile. Android phones support this;
+   iPhone does not expose vibration to web apps, so there it simply does nothing. */
+const HAPTIC_OK = 'vibrate' in navigator;
+document.addEventListener('click', e => {
+  if (!HAPTIC_OK) return;
+  const el = e.target.closest('[data-act], .tabs button, .tile, .btn, .chips button');
+  if (!el || el.disabled) return;
+  try { navigator.vibrate(el.matches('.btn-primary, .f-main') ? [12, 30, 12] : 8); } catch (err) { /* ignore */ }
+}, true);
+
+/* Back button: every screen change becomes a browser history entry, so the phone's back
+   gesture or button steps back through the app instead of closing it. Home is the floor:
+   pressing back on Home keeps you on Home. */
+const NAV = { last: '', applying: false };
+function navSnapshot() { return { view: state.view, screen: state.screen, arg: state.arg, teamChannel: state.teamChannel, agendaDay: state.agendaDay, hubOpen: !!state.hubOpen, staffTab: state.staffTab }; }
+function navKey() { return JSON.stringify(navSnapshot()); }
+function navPush(snap, root) { try { history.pushState({ forum: snap, root: !!root }, ''); } catch (err) { /* history unavailable; the app still works */ } }
+const _renderNav = render;
+render = function () {
+  _renderNav();
+  if (NAV.applying) return;
+  const key = navKey(); if (key === NAV.last) return;
+  NAV.last = key; navPush(navSnapshot(), false);
+};
+window.addEventListener('popstate', e => {
+  const st = e.state && e.state.forum;
+  NAV.applying = true;
+  if (st) Object.assign(state, st);
+  else if (state.attendeeId) { state.screen = 'home'; state.arg = null; state.hubOpen = false; }
+  NAV.last = navKey(); _renderNav();
+  NAV.applying = false;
+  // Landed on the floor: lay a fresh floor on top so the next back press also stays in the app.
+  if (!e.state || e.state.root) navPush(navSnapshot(), true);
+});
+(function seedHistory() {
+  try {
+    const home = Object.assign(navSnapshot(), { screen: state.attendeeId ? 'home' : state.screen, arg: null, hubOpen: false });
+    history.replaceState({ forum: home, root: true }, '');
+    navPush(home, true);
+    const here = navSnapshot();
+    if (JSON.stringify(here) !== JSON.stringify(home)) navPush(here, false);
+    NAV.last = navKey();
+  } catch (err) { /* ignore */ }
+})();
+
 render();
 
 </script>
