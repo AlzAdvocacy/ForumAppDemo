@@ -7,7 +7,7 @@ added in its place. Nothing on `main` or the live site has been touched.
 
 | File | Theme | In one line |
 | --- | --- | --- |
-| `theme-daylight.html` | Daylight | Calm and airy. White header, purple as the one accent, soft rounded cards, floating tab bar. |
+| `theme-daylight.html` | Daylight (chosen direction) | Calm and airy. Slim white header with a three line menu button that slides in the Everything drawer from Pocket. Five tabs (Home, Agenda, Meetings, Act, Team); everything else lives in the drawer. |
 | `theme-nightshift.html` | Night Shift | Dark glass control room. Deep plum canvas, gold for the next thing to do, glowing active tab. |
 | `theme-wayfinder.html` | Wayfinder | Color coded sections. Header, active tab and selected chips take the section's color, so you always know where you are. |
 

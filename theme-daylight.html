@@ -717,6 +717,47 @@ body{font-family:var(--font)}
 .gpin.hotel{background:var(--teal);color:#fff}
 .phone[data-contrast="high"]{--purple:#3C0A52;--purple-deep:#2A0638;--line:#777;--line-strong:#444;--canvas:#fff;--purple-soft:#E6DBF0;--shadow-sm:0 0 0 1px #777;--shadow:0 0 0 2px #000}
 
+/* ---------- Slim header, menu button and the Everything drawer ---------- */
+.app-head,.staff-head.app-head{padding:8px 12px 8px 14px;min-height:54px;align-items:center}
+.app-head .head-l{flex-direction:row;align-items:center;gap:10px}
+.app-head .logo{height:32px;content:url(img/aim-logo-purple.png)}
+.staff-head .logo{content:url(img/aim-logo-white.png)}
+.app-head .sub{margin:0;font-size:.68em;letter-spacing:.12em;padding-left:10px;border-left:1px solid var(--line)}
+.staff-head.app-head .sub{border-left-color:rgba(255,255,255,.35)}
+.head-r{gap:6px}
+.bell{width:40px;height:40px;border-radius:12px}
+.bell.menu-btn{background:var(--purple-deep);color:#fff}
+.bell.menu-btn .bell-svg{width:22px;height:22px}
+.bell.menu-btn.on{background:var(--ink)}
+.proto-strip{font-size:.56em;padding:3px 8px}
+body.app .app-head{padding-top:calc(env(safe-area-inset-top,0px) + 8px)}
+.tabs.five button{font-size:.7em}
+.hub-scrim{position:absolute;inset:0;z-index:25;background:rgba(30,22,38,.35);opacity:0;pointer-events:none;transition:opacity .25s ease}
+.hub-scrim.open{opacity:1;pointer-events:auto}
+.hubsheet{position:absolute;top:0;right:0;bottom:0;width:min(88%,360px);z-index:26;background:var(--canvas);box-shadow:-20px 0 50px rgba(42,20,64,.25);transform:translateX(104%);transition:transform .3s cubic-bezier(.2,.8,.2,1);overflow:auto;padding:calc(env(safe-area-inset-top,0px) + 14px) 14px calc(env(safe-area-inset-bottom,0px) + 24px);display:flex;flex-direction:column;gap:12px;visibility:hidden}
+.hubsheet.open{transform:none;visibility:visible}
+@media (prefers-reduced-motion:reduce){.hubsheet,.hub-scrim{transition:none}}
+.hub-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.avatar-row{display:flex;align-items:center;gap:10px}
+.avatar-row b{display:block;font-size:1.02em;line-height:1.2}
+.hubgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{background:#fff;border:0;border-radius:18px;padding:12px;text-align:left;display:flex;flex-direction:column;gap:5px;min-height:108px;box-shadow:var(--shadow-sm);color:var(--ink)}
+.tile:active{transform:scale(.98)}
+.tile-ico{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--purple-soft);color:var(--purple-deep)}
+.tile-ico svg{width:20px;height:20px}
+.tile b{font-size:.98em;margin-top:2px}
+.tile-sub{font-size:.76em;color:var(--ink-2);line-height:1.3}
+.tile.on{box-shadow:0 0 0 2px var(--purple),var(--shadow-sm)}
+.tile.agenda .tile-ico{background:#DCF0ED;color:#0F6E66}
+.tile.meetings .tile-ico,.tile.map .tile-ico{background:#E0E8F5;color:#1D3F73}
+.tile.act .tile-ico{background:#FCE6DB;color:#B5451B}
+.tile.team .tile-ico{background:#DEF1E4;color:#1F6B3A}
+.tile.alerts .tile-ico,.tile.announcements .tile-ico{background:#FFF1C9;color:#7A4B00}
+.tile.resources .tile-ico,.tile.logistics .tile-ico,.tile.story .tile-ico{background:#EFE4F6;color:#4A0D66}
+.tile.help .tile-ico,.tile.settings .tile-ico,.tile.about .tile-ico{background:#E8E6EE;color:#3E3A4D}
+.hub-foot{margin:auto 0 0;padding-top:6px}
+.phone[data-contrast="high"] .hubsheet{background:#fff}
+
 </style>
 </head>
 <body>
@@ -3102,6 +3143,118 @@ function boot() {
   }
 }
 boot();
+
+</script>
+<script>
+/* ---------- Daylight: layout overlay. Redefines the shell and Home; every original screen is still reachable. ---------- */
+/* ---------- Redesign helpers (additions only; nothing above is changed) ---------- */
+function rdDayItems(day) {
+  const d = D(); const stars = myStars(); const items = [];
+  d.sessions.filter(s => s.day === day && !s.umbrella && (s.type !== 'breakout' || stars[s.id]))
+    .forEach(s => items.push({ kind: 'session', day, start: s.start, end: s.end, ref: s }));
+  if (day === CONFIG.meetingDay) myMeetings(d).forEach(m => items.push({ kind: 'meeting', day, start: m.start, end: m.end, ref: m }));
+  return items.sort((a, b) => toMin(a.start) - toMin(b.start));
+}
+function rdUpcoming() {
+  const n = simNow(); let all = [];
+  CONFIG.days.filter(x => x.n >= n.day).forEach(x => { all = all.concat(rdDayItems(x.n)); });
+  return all.filter(it => rdPhase(it) !== 'past' && !(it.kind === 'meeting' && it.ref.status === 'cancelled'));
+}
+function rdPhase(it) {
+  const n = simNow(); if (it.day !== n.day) return it.day < n.day ? 'past' : 'later';
+  const s = toMin(it.start) * 60, e = toMin(it.end) * 60;
+  if (n.secs >= e) return 'past'; if (n.secs >= s) return 'now'; return 'later';
+}
+function rdTitle(it) { return it.kind === 'meeting' ? it.ref.member : it.ref.title; }
+function rdWhere(it) { return it.kind === 'meeting' ? `${it.ref.building} ${it.ref.room}` : it.ref.room; }
+function rdAct(it) { return it.kind === 'meeting' ? `data-act="meeting" data-arg="${it.ref.id}"` : `data-act="rdSession" data-arg="${it.ref.day}"`; }
+function rdTypeLabel(t) { return { general: 'General session', breakout: 'Breakout', meal: 'Meal', reception: 'Evening', team: 'State team' }[t] || t; }
+function rdClock() { const n = simNow(); return fmtMin(Math.floor(n.secs / 60)); }
+function rdGreeting() { const h = Math.floor(simNow().secs / 3600); return h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening'; }
+function rdDestinations() {
+  const me = attendee(state.attendeeId); const u = unreadCount();
+  return [
+    { id: 'home', tab: true, label: 'Home', sub: 'What is next' },
+    { id: 'agenda', tab: true, label: 'Agenda', sub: 'All three days' },
+    { id: 'meetings', tab: true, label: 'Meetings', sub: 'Your Hill meetings' },
+    { id: 'map', label: 'Map', sub: 'Buildings and walking times' },
+    { id: 'act', tab: true, label: 'Act', sub: 'Letters, posts, thank-yous' },
+    { id: 'team', tab: true, label: 'Team', sub: 'Groups and delegation' },
+    { id: 'alerts', label: 'Alerts', sub: u ? `${u} unread` : 'All caught up' },
+    { id: 'announcements', label: 'Announcements', sub: `${D().announcements.length} from staff` },
+    { id: 'resources', label: 'Resources', sub: 'Guides, kits, one-pagers' },
+    { id: 'logistics', label: 'Logistics', sub: 'Buses, venue, Wi-Fi' },
+    { id: 'story', label: 'Your story', sub: state.story && state.story[state.attendeeId] ? 'Written' : 'Not written yet' },
+    { id: 'help', label: 'Help and contacts', sub: 'Team lead, staff, help desk' },
+    { id: 'settings', label: 'Alerts and display', sub: `Push alerts ${me && me.pushOptIn ? 'on' : 'off'}. Text size ${state.textSize}.` },
+    { id: 'about', label: 'About this prototype', sub: 'What is real and what is simulated' }
+  ];
+}
+const RD_TABS = ['home', 'agenda', 'meetings', 'act', 'team', 'more'];
+const RD_TAB_OF = { meeting: 'meetings', mode: 'meetings', roles: 'meetings', report: 'meetings', thankyou: 'act', map: 'meetings', action: 'act', onboard: 'more', alerts: 'more', resources: 'more', logistics: 'more', story: 'more', announcements: 'more', help: 'more', settings: 'more', about: 'more' };
+function rdScreens() {
+  return { home: homeScreen, agenda: agendaScreen, meetings: meetingsScreen, meeting: meetingScreen, mode: meetingModeScreen, roles: rolesScreen, report: reportScreen, thankyou: thankyouScreen, map: mapScreen, alerts: alertsScreen, onboard: onboardScreen, act: actScreen, action: actionScreen, team: teamScreen, resources: resourcesScreen, logistics: logisticsScreen, story: storyScreen, more: moreScreen, announcements: announcementsScreen, help: () => helpScreen(false), settings: settingsScreen, about: aboutScreen };
+}
+function rdOpen(id) { if (RD_TABS.includes(id)) actions.tab(id); else go(id); }
+function rdChanges() {
+  const changes = myNotifs().filter(x => x.type === 'change' && !x.read);
+  if (!changes.length) return '';
+  return `<section class="changes" aria-live="polite"><h2>${changes.length} change${changes.length > 1 ? 's' : ''} since you last looked</h2><ul style="margin:0;padding-left:18px">${changes.map(c => `<li><b>${esc(c.title)}.</b> ${esc(c.body)} ${c.meetingId ? `<button class="link" data-act="meeting" data-arg="${c.meetingId}">View</button>` : ''}</li>`).join('')}</ul><button class="btn btn-sm" style="margin-top:10px" data-act="gotit">Got it</button></section>`;
+}
+function rdTodayAction() {
+  const acts = actionsForMe(); const today = acts.find(a => a.group === 'Today' && !actionDone(a)); const doneN = acts.filter(actionDone).length;
+  return { acts, today, doneN };
+}
+Object.assign(actions, {
+  rdSession(day) { state.agendaDay = Number(day); state.screen = 'agenda'; state.arg = null; render(); },
+  rdOpen(id) { state.hubOpen = false; state.menuOpen = false; state.focusIdx = 0; rdOpen(id); }
+});
+/* Live countdowns for any element carrying data-cd="day|start" */
+setInterval(() => {
+  if (state.view !== 'attendee') return;
+  document.querySelectorAll('[data-cd]').forEach(el => { const [d, s] = el.dataset.cd.split('|'); el.textContent = countdownText(Number(d), s); });
+}, 1000);
+
+/* Daylight: slim header with a menu button that slides in the Everything drawer. */
+Object.assign(ICONS, {
+  menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
+  close: '<path d="M6 6l12 12M18 6L6 18"/>',
+  map: '<path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/>',
+  alerts: ICONS.bell,
+  announcements: '<path d="M3 11v2a1 1 0 0 0 1 1h3l6 4V6L7 10H4a1 1 0 0 0-1 1z"/><path d="M17 9a4 4 0 0 1 0 6"/>',
+  resources: '<path d="M4 4h12a2 2 0 0 1 2 2v14H6a2 2 0 0 1-2-2z"/><path d="M4 18a2 2 0 0 1 2-2h12M8 8h6"/>',
+  logistics: '<rect x="3" y="5" width="18" height="12" rx="2"/><path d="M3 11h18M7 17v2M17 17v2M7 8h2M15 8h2"/>',
+  story: '<path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M13 7l3 3"/>',
+  help: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.7"/><path d="M12 17h.01"/>',
+  settings: '<path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="9" cy="17" r="2"/>',
+  about: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>'
+});
+Object.assign(actions, { hub() { state.hubOpen = !state.hubOpen; render(); } });
+function appHead(staff) {
+  const me = state.attendeeId && !staff ? attendee(state.attendeeId) : null; const unread = me ? unreadCount() : 0;
+  const open = !!state.hubOpen;
+  return `<header class="app-head ${staff ? 'staff-head' : ''}">
+    <div class="head-l"><img class="logo" src="${staff ? LOGO_WHITE : LOGO_PURPLE}" alt="AIM, Alzheimer's Impact Movement, Alzheimer's Association"><div class="sub">${staff ? 'Forum staff' : 'Advocacy Forum'}</div></div>
+    <div class="head-r">${me ? `<button class="bell" data-act="go" data-arg="alerts" aria-label="Alerts, ${unread} unread">${icon('bell', 'bell-svg')}${unread ? `<span class="badge">${unread}</span>` : ''}</button><button class="bell menu-btn ${open ? 'on' : ''}" data-act="hub" aria-expanded="${open}" aria-controls="hub" aria-label="${open ? 'Close menu' : 'Menu'}">${icon(open ? 'close' : 'menu', 'bell-svg')}</button>` : ''}</div></header><div class="proto-strip">Prototype: fictional data</div>
+    ${state.offline ? `<div class="offline-banner"><span class="dot"></span><span><b>You are offline.</b> Showing the schedule saved on this phone. Last updated ${esc(D().lastUpdated)}.</span></div>` : ''}`;
+}
+function attendeeShell() {
+  if (!state.attendeeId) return appHead(false) + (state.screen === 'help' ? `<div class="screen" id="screen">${helpScreen(true)}</div>` : entryScreen());
+  const s = state.screen; const fn = rdScreens()[s] || homeScreen; const active = RD_TAB_OF[s] || s; const me = attendee(state.attendeeId);
+  const open = !!state.hubOpen;
+  const tab = (id, label) => `<button class="${active === id ? 'on' : ''}" data-act="rdOpen" data-arg="${id}" aria-current="${active === id ? 'page' : 'false'}">${icon(id)}<span>${label}</span></button>`;
+  const tile = d => `<button class="tile ${d.id} ${active === d.id ? 'on' : ''}" data-act="rdOpen" data-arg="${d.id}"><span class="tile-ico">${icon(ICONS[d.id] ? d.id : 'more')}</span><b>${d.label}</b><span class="tile-sub">${esc(d.sub)}</span></button>`;
+  const drawer = `<div class="hub-scrim ${open ? 'open' : ''}" data-act="hub" aria-hidden="true"></div>
+    <aside class="hubsheet ${open ? 'open' : ''}" id="hub" role="dialog" aria-label="Everything in the app" ${open ? '' : 'inert'}>
+      <div class="hub-head"><div><div class="avatar-row">${avatar(me)}<div><b>${esc(me.name)}</b><div class="tiny">${esc(me.city)}, ${esc(me.state)}. Code ${esc(me.code)}</div></div></div></div><button class="bell menu-btn" data-act="hub" aria-label="Close menu">${icon('close', 'bell-svg')}</button></div>
+      <div class="hubgrid">${rdDestinations().filter(d => d.id !== 'more').map(tile).join('')}</div>
+      <p class="tiny hub-foot"><button class="link" data-act="signout">Sign out</button></p>
+    </aside>`;
+  return appHead(false) + `<div class="screen" id="screen">${fn(state.arg)}</div>${drawer}
+    <nav class="tabs six five" aria-label="Main">${tab('home', 'Home')}${tab('agenda', 'Agenda')}${tab('meetings', 'Meetings')}${tab('act', 'Act')}${tab('team', 'Team')}</nav>`;
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && state.hubOpen) { state.hubOpen = false; render(); } });
+render();
 
 </script>
 </body>
