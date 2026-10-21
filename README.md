@@ -8,7 +8,7 @@ A phone-installable version of the Advocacy Forum attendee app prototype. It ope
 2. Unzip the download. In the new repository, click **Add file**, then **Upload files**. Drag everything inside the `forum-app` folder onto the page, including the `fonts`, `icons`, `img` and `vendor` folders, then click **Commit changes**. (The hidden `.nojekyll` file is optional. Skip it if your computer hides it.)
 3. Go to **Settings**, then **Pages**. Under Build and deployment, set Source to **Deploy from a branch**, choose **main** and **/(root)**, and click **Save**.
 4. After a minute or two, the site address appears at the top of the Pages settings. It looks like `https://ORG-NAME.github.io/forum-app-demo/`.
-5. Add `links.html` to the end of that address to get the presenter page with a QR code for each persona.
+5. Add `links.html` to the end of that address to get the presenter page with a QR code for each persona, or `demo.html` for scenarios that also set the day and time (Day 1, Hill Day, Day 3).
 
 ## Set up a demo phone
 
@@ -37,6 +37,8 @@ The live map has not been tested yet, because the environment it was built in ca
 - **Edit on GitHub**, then open `sw.js` and change `VERSION` (for example `forum-demo-1` to `forum-demo-2`). Phones pick up the new version the second time the app is opened after your change, because the first open downloads it in the background.
 - **Home Screen name:** change `short_name` in `manifest.webmanifest`, `apple-mobile-web-app-title` in `index.html`, and `shortName` in `app-config.js`. Names longer than about 12 characters get cut off under the icon on iPhone.
 - **Personas:** the list is near the bottom of `links.html`. Codes must match an attendee in the app's fictional data.
+- **Scenarios by day:** the list is near the bottom of `demo.html`. A link can carry `clock=N`, where N is the index of a preset in `CONFIG.clockPresets` inside `index.html` (0 and 1 are Day 1, 2 to 5 are Hill Day, 6 is Day 3).
+- **Look and feel:** the style block in `index.html` is the Daylight theme, and the short script at the very end of the file draws the slim header, the menu button and the Everything drawer. Other screens are untouched.
 - **Hotel pin:** add the venue's name and coordinates to `hotel` in `app-config.js`.
 
 ## What is real and what is simulated
