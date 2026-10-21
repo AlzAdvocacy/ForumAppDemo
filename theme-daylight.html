@@ -3250,7 +3250,8 @@ function attendeeShell() {
       <div class="hubgrid">${rdDestinations().filter(d => d.id !== 'more').map(tile).join('')}</div>
       <p class="tiny hub-foot"><button class="link" data-act="signout">Sign out</button></p>
     </aside>`;
-  return appHead(false) + `<div class="screen" id="screen">${fn(state.arg)}</div>${drawer}
+  const body = fn(state.arg).split('data-act="tab" data-arg="more">&#8249; More').join('data-act="hub">&#8249; Menu');
+  return appHead(false) + `<div class="screen" id="screen">${body}</div>${drawer}
     <nav class="tabs six five" aria-label="Main">${tab('home', 'Home')}${tab('agenda', 'Agenda')}${tab('meetings', 'Meetings')}${tab('act', 'Act')}${tab('team', 'Team')}</nav>`;
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && state.hubOpen) { state.hubOpen = false; render(); } });
