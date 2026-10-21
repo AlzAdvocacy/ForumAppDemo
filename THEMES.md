@@ -11,6 +11,21 @@ added in its place. Nothing on `main` or the live site has been touched.
 | `theme-nightshift.html` | Night Shift | Dark glass control room. Deep plum canvas, gold for the next thing to do, glowing active tab. |
 | `theme-wayfinder.html` | Wayfinder | Color coded sections. Header, active tab and selected chips take the section's color, so you always know where you are. |
 
+## Round two: five redesigns that also change the layout
+
+These keep every screen and record, but reshape the shell and the Home screen.
+Each one is `index.html` plus a style layer plus a short script at the end that
+redefines the shell and Home. The original screens, actions and data are untouched
+and every destination is still reachable.
+
+| File | Theme | What changes |
+| --- | --- | --- |
+| `theme-dispatch.html` | Dispatch | Home is a departures board for the whole day: sessions and your meetings in one time ordered list with a NOW marker. Navigation moves to a strip under the header. |
+| `theme-pocket.html` | Pocket | No tab bar. One hub button opens a grid of every destination, including the ones that used to hide under More. Home is a swipeable deck of color coded stop cards. |
+| `theme-briefing.html` | Briefing | Home reads as a message thread from Forum staff, built from the same data: greeting, up next, changes, buses, your day, today's action, announcements. Buttons under each message act as replies. |
+| `theme-lanyard.html` | Lanyard | Home is your conference badge on a strap, with a QR of your code, and today's items as tear off tickets with stamps for done, checked in, reported or cancelled. |
+| `theme-focus.html` | Focus | One thing at a time. A very large countdown, the next item, one primary button, Back and Next to step through the day. Two big buttons replace the tab bar: Next up and Everything. Text size toggle in the header. |
+
 ## How to preview
 
 Open any of the three files the same way as `index.html`. Persona links work the
@@ -48,6 +63,19 @@ tappable.
 
 All three keep the brand purple, the AIM logo, the Archivo typeface, the
 high contrast and large text settings, and the staff view.
+
+Notes on round two:
+
+- Dispatch, Lanyard and Focus merge the agenda and your meetings into one list for
+  the current day. Breakouts appear only when starred, so the list stays short.
+- Pocket and Focus drop the six tab bar. Everything that was under More is one tap
+  away in the hub or the Everything menu. Worth testing with a few volunteers,
+  since a hidden menu is a real trade off against a visible tab bar.
+- Briefing's messages are generated from data, not typed by anyone. The staff
+  avatar is the same one the Team threads already use.
+- Lanyard draws the QR with the QR library already in `vendor/`. The QR encodes
+  only the fictional code.
+- Focus includes its own text size toggle in the header, and all buttons are larger.
 
 ## Adopting one
 
