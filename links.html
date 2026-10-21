@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Demo links for the Alz Advocacy Forum prototype</title>
+<meta name="theme-color" content="#4A0D66">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<style>
+@font-face{font-family:'Archivo';font-weight:500;font-display:swap;src:url(fonts/archivo-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Archivo';font-weight:700;font-display:swap;src:url(fonts/archivo-latin-700-normal.woff2) format('woff2')}
+@font-face{font-family:'Archivo';font-weight:900;font-display:swap;src:url(fonts/archivo-latin-900-normal.woff2) format('woff2')}
+:root{--purple:#4A0D66;--gold:#FFA400;--teal:#359A8E;--ink:#1A1A1A;--ink-2:#58595B;--line:#E6E7E8}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Archivo',Helvetica,Arial,sans-serif;color:var(--ink);background:#FFFFFF;line-height:1.45;-webkit-text-size-adjust:100%}
+header{background:var(--purple);color:#FFFFFF;padding:calc(env(safe-area-inset-top,0px) + 20px) 24px 22px}
+.wrap{max-width:1120px;margin:0 auto}
+header .wrap{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+header img{height:64px;width:auto;display:block}
+header .t{font-weight:900;font-size:1.5rem;letter-spacing:-.01em;line-height:1.1}
+header .s{color:var(--gold);font-weight:700;font-size:.9rem;margin-top:4px}
+main{padding:28px 24px 48px}
+h1{font-weight:900;font-size:clamp(1.8rem,4vw,2.6rem);letter-spacing:-.02em;line-height:1;margin:0 0 10px;max-width:22ch}
+.lede{color:var(--ink-2);font-weight:500;max-width:60ch;margin:0 0 26px;font-size:1.05rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;margin-bottom:40px}
+.card{border:3px solid var(--ink);border-radius:6px;box-shadow:8px 8px 0 var(--purple);padding:18px;display:grid;grid-template-columns:1fr 132px;gap:4px 16px;align-items:start;background:#FFFFFF}
+.card.staff{box-shadow:8px 8px 0 var(--gold)}
+.card h2{margin:0;font-weight:900;font-size:1.3rem;letter-spacing:-.01em;line-height:1.15}
+.who{color:var(--ink-2);font-weight:500;font-size:.92rem;margin:2px 0 10px}
+.shows{font-size:.95rem;margin:0}
+.qr{grid-column:2;grid-row:1 / span 3;width:132px;height:132px}
+.qr svg{width:100%;height:100%;display:block}
+.code{display:inline-block;background:var(--gold);color:var(--purple);font-weight:900;letter-spacing:.12em;border-radius:4px;padding:2px 8px;font-size:.85rem;margin-top:10px}
+.acts{grid-column:1 / -1;display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.btn{font:inherit;font-weight:900;font-size:.85rem;border:2px solid var(--ink);background:#FFFFFF;color:var(--ink);border-radius:6px;padding:8px 14px;min-height:42px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.btn.primary{background:var(--teal);border-color:var(--teal);color:#FFFFFF}
+.url{grid-column:1 / -1;font-size:.78rem;color:var(--ink-2);word-break:break-all;margin-top:8px}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;border-top:3px solid var(--ink);padding-top:26px}
+.how h2{font-weight:900;font-size:1.15rem;margin:0 0 10px}
+.how ol,.how ul{margin:0;padding-left:20px}
+.how li{margin:0 0 8px;max-width:60ch}
+.note{background:#F6F0F9;border-left:6px solid var(--purple);padding:12px 16px;border-radius:0 6px 6px 0;margin-top:30px;max-width:80ch;font-size:.95rem}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+@media print{header{print-color-adjust:exact;-webkit-print-color-adjust:exact}.acts,.how,.note{display:none}.card{break-inside:avoid;box-shadow:none}.grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <img src="img/aim-logo-white.png" alt="AIM, Alzheimer's Impact Movement, Alzheimer's Association">
+  <div><div class="t">Demo links</div><div class="s">Alz Advocacy Forum app prototype. Every name and meeting is fictional.</div></div>
+</div></header>
+<main><div class="wrap">
+  <h1>Hand someone a persona</h1>
+  <p class="lede">Each link opens the app as one fictional attendee. Point a phone camera at the code, or copy the link into a text message.</p>
+  <div class="grid" id="grid"></div>
+
+  <section class="how">
+    <div>
+      <h2>Set up a demo phone</h2>
+      <ol>
+        <li><b>iPhone:</b> open a persona link in Safari, tap Share, then Add to Home Screen, then Add. Open the app from the Home Screen. If it opens to the code screen, type the persona's code once and it stays signed in.</li>
+        <li><b>Android:</b> open the link in Chrome and tap Install when it appears, or use the menu and choose Add to Home screen.</li>
+        <li>Open the app once while you have a signal. After that it opens without one.</li>
+      </ol>
+    </div>
+    <div>
+      <h2>Run the demo</h2>
+      <ul>
+        <li><b>Demo controls:</b> tap the AIM logo at the top of the app three times. Tap Done to hide them.</li>
+        <li><b>Jump to Hill Day morning</b> sets the clock so countdowns and "up next" make sense. "Hill Day at the real time" matches the phone's own clock.</li>
+        <li><b>Schedule change in 10 seconds</b> gives you time to set the phone down. The banner appears, the phone buzzes on Android, and the change shows on Home and Meetings.</li>
+        <li><b>Airplane mode</b> keeps the whole schedule on screen and shows the offline banner. Turn it off and the app says it is back online.</li>
+        <li><b>Reset demo data</b> in the controls puts everything back to the start.</li>
+      </ul>
+    </div>
+  </section>
+  <p class="note">This page and the app are public at this address. Use only fictional data here. Real advocate names, phone numbers or schedules should never go in this repository.</p>
+</div></main>
+<script src="vendor/qrcode.js"></script>
+<script>
+const PERSONAS = [
+  { q: 'c=K7Q4M2', code: 'K7Q4M2', name: 'Denise Carver', who: 'Ohio. Ambassador.', shows: 'The everyday view. She leads one meeting group and sits on another, so you see both sides of Hill Day.' },
+  { q: 'c=P4L7Q8', code: 'P4L7Q8', name: 'Theo Brandt', who: 'Colorado. Ambassador.', shows: 'Schedule changes. One meeting already moved and one is still tentative.' },
+  { q: 'c=S9E3T6', code: 'S9E3T6', name: 'Dolores Abara', who: 'Texas. Ambassador.', shows: 'Scale. Texas brings 60 advocates, and she leads one of the meeting groups.' },
+  { q: 'c=T5M9K2', code: 'T5M9K2', name: 'Gwen Adebayo', who: 'Ohio. First-time advocate.', shows: 'A first-timer with phone alerts off, so updates reach her by text only.' },
+  { q: 'c=Z2W7L4', code: 'Z2W7L4', name: 'Harold Pike', who: 'Georgia. First-time advocate.', shows: 'What someone sees before staff have assigned any meetings.' },
+  { q: 'view=staff', code: 'Staff', name: 'Staff view', who: 'Home Office and field staff.', shows: 'Edit a meeting, send the change, and watch the situation board. Best on a laptop or tablet.', staff: true }
+];
+const base = new URL('./', location.href);
+const grid = document.getElementById('grid');
+grid.innerHTML = PERSONAS.map((p, i) => {
+  const url = new URL('?' + p.q, base).href;
+  let svg = '';
+  try { const qr = qrcode(0, 'M'); qr.addData(url); qr.make(); svg = qr.createSvgTag({ cellSize: 4, margin: 2, scalable: true, alt: 'QR code for ' + p.name }); } catch (e) { svg = ''; }
+  return `<article class="card ${p.staff ? 'staff' : ''}">
+    <div><h2>${p.name}</h2><div class="who">${p.who}</div></div>
+    <div class="qr">${svg}</div>
+    <p class="shows">${p.shows}</p>
+    <div><span class="code">${p.code}</span></div>
+    <div class="acts"><a class="btn primary" href="${url}">Open</a><button class="btn" data-copy="${url}">Copy link</button></div>
+    <div class="url">${url}</div>
+  </article>`;
+}).join('');
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-copy]'); if (!b) return;
+  const done = () => { b.textContent = 'Copied'; setTimeout(() => { b.textContent = 'Copy link'; }, 1600); };
+  if (navigator.clipboard) navigator.clipboard.writeText(b.dataset.copy).then(done).catch(() => prompt('Copy this link', b.dataset.copy));
+  else prompt('Copy this link', b.dataset.copy);
+});
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname))) navigator.serviceWorker.register('sw.js').catch(() => { });
+</script>
+</body>
+</html>
